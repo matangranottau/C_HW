@@ -6,12 +6,12 @@
 int is_palindrome_recursive(char* str, int start, int end) {
     char first = str[start], last = str[end];
     if (!isalpha(first)) {     // Check if first is not alpha
-        first = str[++start];   // Increment, then assign
+        return is_palindrome_recursive(str, start + 1, end); // Cut first only
     }
     if (!isalpha(last)) {      // Check if last is not alpha
-        last = str[--end];    // Decrement, then assign
+        return is_palindrome_recursive(str, start, end - 1); // Cut last only
     }
-    if (start >= end) {        // Stop Condtion #2 - True If '' or Single Letter
+    if (start >= end) {        // Stop Condtion # - True If '' or Single Letter
         return 1;
     }
     if (tolower(first) == tolower(last)) {
