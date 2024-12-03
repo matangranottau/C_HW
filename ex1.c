@@ -18,7 +18,7 @@ int is_palindrome_recursive(char* str, int start, int end) {
     if (tolower(first) == tolower(last)) {
         return is_palindrome_recursive(str, start + 1, end - 1); // Cut both ways
     }
-    
+    return 0;
 }
 
 // SECTION B: Iterative Palindrome Check
