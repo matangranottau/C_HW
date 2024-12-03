@@ -2,15 +2,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-// Commit Test why are you gay?
 // SECTION A: Recursive Palindrome Check
 int is_palindrome_recursive(char* str, int start, int end) {
     char first = str[start], last = str[end];
-    if (!isalpha(first)) {     // Check if first is alpha - if not increase first
-        first++;
+    if (!isalpha(first)) {     // Check if first is not alpha
+        first = str[++start];   // Increment, then assign
     }
-    if (!isalpha(last)) {      // Check if last is alpha - if not decrease last
-        last--;
+    if (!isalpha(last)) {      // Check if last is not alpha
+        last = str[--end];    // Decrement, then assign
     }
     if (start >= end) {        // Stop Condtion #2 - True If '' or Single Letter
         return 1;
