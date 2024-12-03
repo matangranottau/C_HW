@@ -5,19 +5,19 @@
 // SECTION A: Recursive Palindrome Check
 int is_palindrome_recursive(char* str, int start, int end) {
     char first = str[start], last = str[end];
+    if (start >= end) {        // Stop Condtion #1 - True If '' or Single Letter
+        return 1;
+    }
     if (!isalpha(first)) {     // Check if first is not alpha
         return is_palindrome_recursive(str, start + 1, end); // Cut first only
     }
     if (!isalpha(last)) {      // Check if last is not alpha
         return is_palindrome_recursive(str, start, end - 1); // Cut last only
     }
-    if (start >= end) {        // Stop Condtion # - True If '' or Single Letter
-        return 1;
-    }
     if (tolower(first) == tolower(last)) {
         return is_palindrome_recursive(str, start + 1, end - 1); // Cut both ways
     }
-    return 0;
+    return 0;                  // Stop Condition #2 - False if not equal
 }
 
 // SECTION B: Iterative Palindrome Check
