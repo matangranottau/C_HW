@@ -22,8 +22,38 @@ int is_palindrome_iterative(char* str) {
     // If alpha start++ or end--
     // If not equal - break
     // if start >= end - return True
-    return 0; // Placeholder return value
+    // loop that count untill \0
+    int length = 0;
+    for (int i = 0; str[i] != '\0'; i++) {
+        length++;
+    }
+    int end = length, start = 0;
+    for (int start = 0; start < end; start++) {
+        for (int end = length; start < end; end--) {
+            if (isalpha(str[start]) != 0)
+            {
+                start++;
+            }
+            else if (isalpha(str[end] != 0))
+            {
+                end--;
+            }
+            else if (isalpha(str[end] == 0) && isalpha(str[start]) == 0)
+            {
+                if (str[start] != str[end]) {
+                    return 0;
+                }
+                else {
+                    start++;
+                    end--;
+                }
+
+            }
+        }
+    }
+    return 1; // Placeholder return value
 }
+
 
 // Driver Program
 int main() {
