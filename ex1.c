@@ -18,6 +18,10 @@ int is_palindrome_recursive(char* str, int start, int end) {
 // SECTION B: Iterative Palindrome Check
 int is_palindrome_iterative(char* str) {
     // TODO: Implement the logic for iterative palindrome check
+    // Run from both ends
+    // If alpha start++ or end--
+    // If not equal - break
+    // if start >= end - return True
     return 0; // Placeholder return value
 }
 
