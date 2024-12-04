@@ -28,8 +28,8 @@ int is_palindrome_iterative(char* str) {
         length++;
     }
     int end = length, start = 0;
-    for (int start = 0; start < end; start++) {
-        for (int end = length; start < end; end--) {
+    for (int start = 0; start < end; ) {
+        
             if (isalpha(str[start]) != 0)
             {
                 start++;
@@ -49,7 +49,7 @@ int is_palindrome_iterative(char* str) {
                 }
 
             }
-        }
+        
     }
     return 1; // Placeholder return value
 }
