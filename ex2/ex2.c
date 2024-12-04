@@ -5,10 +5,15 @@
 // SECTION A: Recursive Subsequences Generation
 void generate_subsequences(char* str, char* current, int index) {
     // TODO: Implement the recursive logic for generating subsequences
-    if (strlen(str) == index) { // If only one char: 
+    if (strlen(str) == index + 1) { // If only one char: 
         if (strlen(current) > 0) {
             printf("%s\n", current);//
+            printf("%s%c\n", current, str[index]);
         }
+        else {
+            printf("%c\n", str[index]);
+        }
+        
     }   
     else {
         generate_subsequences(str, current, index + 1); // Print without the char
