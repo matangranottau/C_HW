@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
-
+// check check
 // SECTION A: Recursive Subsequences Generation
 void generate_subsequences(char* str, char* current, int index) {
     // TODO: Implement the recursive logic for generating subsequences
