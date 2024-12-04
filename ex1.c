@@ -29,33 +29,28 @@ int is_palindrome_iterative(char* str) {
     // if start >= end - return True
     // loop that count untill \0
     int length = 0;
-    for (int i = 0; str[i] != '\0'; i++) {
+    for (int i = 0; str[i] != '\0'; i++) { // checking the length withot any library
         length++;
     }
-    int end = length, start = 0;
-    for (int start = 0; start < end; ) {
-        
-            if (isalpha(str[start]) != 0)
-            {
-                start++;
+    int first = 0, last = length;
+    while (first <= last) {
+        if (!isalpha(str[first])) { // Check if first is not alpha
+            first++;                // continue to the next char
+        }
+        else if (!isalpha(str[last])) {   // Check if last is not alpha
+            last--;                        // continue to the previous char
+        }
+        else {
+            if (tolower(str[first]) == tolower(str[last])) { // if they are equal continue both side
+                first++;
+                last--;
             }
-            else if (isalpha(str[end] != 0))
-            {
-                end--;
+            else {
+                return 0;                   // FALSE if not equal
             }
-            else if (isalpha(str[end] == 0) && isalpha(str[start]) == 0)
-            {
-                if (str[start] != str[end]) {
-                    return 0;
-                }
-                else {
-                    start++;
-                    end--;
-                }
-
-            }
-        
+        }
     }
+ 
     return 1; // Placeholder return value
 }
 
