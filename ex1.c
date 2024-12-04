@@ -2,17 +2,22 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-// Commit Test why are you gay?
 // SECTION A: Recursive Palindrome Check
 int is_palindrome_recursive(char* str, int start, int end) {
-    // TODO: Implement the logic for recursive palindrome check
-    // First Check if First/Last is alpha - if not cut First or Last
-    // Stop Condition #1 - If First letter != Last Letter
-    // Stop Condtion #2 - If '' or Single Letter
-    // Cut both ways
-
-
-    return 0; // Placeholder return value
+    char first = str[start], last = str[end];
+    if (start >= end) {        // Stop Condtion #1 - True If '' or Single Letter
+        return 1;
+    }
+    if (!isalpha(first)) {     // Check if first is not alpha
+        return is_palindrome_recursive(str, start + 1, end); // Cut first only
+    }
+    if (!isalpha(last)) {      // Check if last is not alpha
+        return is_palindrome_recursive(str, start, end - 1); // Cut last only
+    }
+    if (tolower(first) == tolower(last)) {
+        return is_palindrome_recursive(str, start + 1, end - 1); // Cut both ways
+    }
+    return 0;                  // Stop Condition #2 - False if not equal
 }
 
 // SECTION B: Iterative Palindrome Check
