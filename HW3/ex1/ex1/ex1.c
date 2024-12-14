@@ -19,6 +19,13 @@ void create_board(char board[][2 * MAX_SIZE], int N) {
 }
 void print_board(const char board[][2 * MAX_SIZE]) {
 	/* Prints board. */
+	int N = strlen(board[0]);
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < 2 * N; j++) {
+			printf("%c", board[i][j]);
+		}
+		printf("\n");
+	}
 }
 void update_board(char board[][2 * MAX_SIZE], const char* current_mark) {
 	/*
@@ -35,14 +42,14 @@ void pass_turn(char* current_player) {
 	/* Alternate current player and mark*/
 }
 
-// Testing #1
+/* Testing #1
 int main() {
 	char board[MAX_SIZE][2 * MAX_SIZE];
-	create_board(board, 3);
+	create_board(board, 8);
 	return 0;
 		
 }
-/*
+*/
 
 int main() {
 	char board[MAX_SIZE][2 * MAX_SIZE];
@@ -72,4 +79,3 @@ int main() {
 	printf("There is a Tie!\n");
 	return 0;
 }
-*/
