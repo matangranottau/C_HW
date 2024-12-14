@@ -5,7 +5,17 @@
 #define MAX_SIZE 10
 
 void create_board(char board[][2 * MAX_SIZE], int N) {
-	/* Assign to board: Nx2N nested array. */
+	/* Assign to board: Nx2N nested array. (no '\n' in assignment) */
+	for (int i; i < N; i++) {
+		for (int j; j < 2*N; j++) {
+			if (0 == j % 2) {
+				board[i][j] = '_';
+			}
+			else {
+				board[i][j] = (j == 2 * N - 1) ? '\0' : ' ';
+			}
+		}
+	}
 }
 void print_board(const char board[][2 * MAX_SIZE]) {
 	/* Prints board. */
@@ -25,6 +35,12 @@ void pass_turn(char* current_player) {
 	/* Alternate current player and mark*/
 }
 
+/* Testing #1
+int main() {
+	char board[MAX_SIZE][2 * MAX_SIZE];
+	create_board(board, 3)
+}
+*/
 
 int main() {
 	char board[MAX_SIZE][2 * MAX_SIZE];
