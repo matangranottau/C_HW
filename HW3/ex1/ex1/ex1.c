@@ -6,8 +6,8 @@
 
 void create_board(char board[][2 * MAX_SIZE], int N) {
 	/* Assign to board: Nx2N nested array. (no '\n' in assignment) */
-	for (int i; i < N; i++) {
-		for (int j; j < 2*N; j++) {
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < 2*N; j++) {
 			if (0 == j % 2) {
 				board[i][j] = '_';
 			}
@@ -35,12 +35,14 @@ void pass_turn(char* current_player) {
 	/* Alternate current player and mark*/
 }
 
-/* Testing #1
+// Testing #1
 int main() {
 	char board[MAX_SIZE][2 * MAX_SIZE];
-	create_board(board, 3)
+	create_board(board, 3);
+	return 0;
+		
 }
-*/
+/*
 
 int main() {
 	char board[MAX_SIZE][2 * MAX_SIZE];
@@ -70,3 +72,4 @@ int main() {
 	printf("There is a Tie!\n");
 	return 0;
 }
+*/
