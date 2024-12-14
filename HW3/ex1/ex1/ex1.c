@@ -17,9 +17,8 @@ void create_board(char board[][2 * MAX_SIZE], int N) {
 		}
 	}
 }
-void print_board(const char board[][2 * MAX_SIZE]) {
+void print_board(const char board[][2 * MAX_SIZE],const int N) {
 	/* Prints board. */
-	int N = strlen(board[0]);
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < 2 * N; j++) {
 			printf("%c", board[i][j]);
@@ -61,13 +60,13 @@ int main() {
 	scanf("%d", &N);
 	create_board(board, N);
 	printf("Welcome to %dx%d Tic-Tac-Toe:\n", N, N);
-	print_board(board);
+	print_board(board, N);
 	do
 	{
 		turn_num++;
 		printf("Player %d, please insert your move :\n", *current_player);
 		update_board(board, current_mark);
-		print_board(board);
+		print_board(board, N);
 		won = check_won(board, current_mark);
 		if (!won) {
 			pass_turn(current_player);
