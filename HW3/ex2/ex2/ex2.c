@@ -83,7 +83,7 @@ int main() {
 	char sorted_search[MAX_LEN + 1]; /* sort every pool*/
 	strcpy(sorted_search, search_string);
 	sort_str(sorted_search);
-
+	/*BUG : Dont forget to sort the pool itself!*/
 	for (int i = 0; i < pool; i++) { /* if is permutation add 1*/
 		char temp[MAX_LEN + 1];
 		strcpy(temp, pool[i]);
