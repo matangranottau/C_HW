@@ -19,9 +19,7 @@ void ignore_spaces(char indices[]) {
 int* get_idx() { // return array of two integers (user input inside the function)
 	// get value, ignore spaces
 	char indices[MAX_INPUT_SIZE];			
-	//fgets(indices, MAX_INPUT_SIZE, stdin);
 	scanf("%[^\n]", indices);
-	//indices[strlen(indices) - 1] = '\0';
 	ignore_spaces(indices);
 
 	// assign idx
@@ -61,8 +59,15 @@ void update_board(char board[][2 * MAX_SIZE], const char* current_mark, const in
 	*/
 	
 	// ask for indices
-	int* idx;
-	idx = get_idx();
+	char indices[MAX_INPUT_SIZE];
+	scanf("%[^\n]", indices);
+	ignore_spaces(indices);
+
+	// assign idx
+	int idx1, idx2;
+	idx1 = (int)(*(strchr(indices, ',') - 1)) - '0'; // search for first comma --> take the value of the pervious char --> casting --> convert ASCII to int (like in rec 6)
+	idx2 = (int)indices[strlen(indices) - 1] - '0';	// similar to line 28, but always will appear at the end of the string.
+	int idx[2] = { idx1, idx2 };
 
 	// check if valid 
 
