@@ -44,14 +44,18 @@ int is_permutation(char* str1, char* str2) {
 	/* 
 	after sortinf check if the strings are equal
 	(see the function strcmp that he talked about in  recitation 6)*/
+	if (0 == strcmp(str1, str2)) {
+		return 1;
+	}
+	return 0;
 }
 
 /*Tests*/
 #if 0
 int main(){
-	char str[10] = "matan dov";
+	char str[10] = "matan";
 	sort_str(str);
-	printf("%s", str);
+	printf("%d", is_permutation(str, "aamnt"));
 	return 0;
 }
 #endif
