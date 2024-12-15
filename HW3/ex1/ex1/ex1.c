@@ -81,8 +81,8 @@ void pass_turn(const char* current_player) {
 }
 
 //test main
-
-int main() {
+/*
+  int main() {
 
 	int* idx;
 	idx = get_idx();
@@ -90,8 +90,8 @@ int main() {
 	return 0;
 		
 }
+*/
 
-/*
 int main() {
 	char board[MAX_SIZE][2 * MAX_SIZE];
 	const char player_1 = 1, mark_1 = 'X', player_2 = 2, mark_2 = 'O';
@@ -120,4 +120,3 @@ int main() {
 	printf("There is a Tie!\n");
 	return 0;
 }
-*/
