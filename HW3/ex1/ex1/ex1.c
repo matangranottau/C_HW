@@ -16,18 +16,15 @@ void ignore_spaces(char indices[]) {
 	}
 	*indices = '\0';
 }
-int* get_idx() { // return array of two integers (user input inside the function)
+void get_idx(int idx[]) { // gets an array of two int, and assigns two values (from input)
 	// get value, ignore spaces
 	char indices[MAX_INPUT_SIZE];			
-	scanf("%[^\n]", indices);
+	scanf(" %[^\n]", indices);
 	ignore_spaces(indices);
 
 	// assign idx
-	int idx1, idx2;
-	idx1 = (int)(*(strchr(indices, ',') - 1)) - '0'; // search for first comma --> take the value of the pervious char --> casting --> convert ASCII to int (like in rec 6)
-	idx2 = (int)indices[strlen(indices) - 1] - '0';	// similar to line 28, but always will appear at the end of the string.
-	int idx[2] = { idx1, idx2 };
-	return idx;
+	idx[0] = (int)(*(strchr(indices, ',') - 1)) - '0'; // search for first comma --> take the value of the pervious char --> casting --> convert ASCII to int (like in rec 6)
+	idx[1] = (int)indices[strlen(indices) - 1] - '0';	// similar to line 28, but always will appear at the end of the string.
 }
 void create_board(char board[][2 * MAX_SIZE], const int N) {
 	/* Assign to board: Nx2N nested array. (no '\n' in assignment) */
@@ -59,8 +56,8 @@ void update_board(char board[][2 * MAX_SIZE], const char* current_mark, const in
 	*/
 	
 	// ask for indices
-	int* idx;
-	idx = get_idx();
+	int idx[2] = { 0 };
+	get_idx(idx);
 
 	// check if valid 
 
@@ -74,7 +71,7 @@ void pass_turn(const char* current_player) {
 }
 
 //test main
-
+/*
 int main() {
 
 	int* idx;
@@ -83,8 +80,8 @@ int main() {
 	return 0;
 		
 }
+*/
 
-/*
 int main() {
 	char board[MAX_SIZE][2 * MAX_SIZE];
 	const char player_1 = 1, mark_1 = 'X', player_2 = 2, mark_2 = 'O';
@@ -113,4 +110,3 @@ int main() {
 	printf("There is a Tie!\n");
 	return 0;
 }
-*/
