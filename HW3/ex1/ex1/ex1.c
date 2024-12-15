@@ -37,7 +37,11 @@ void update_board(char board[][2 * MAX_SIZE], const char* current_mark, const in
 	int idx[2] = { 0 };
 	scanf(" %d , %d", &idx[0], &idx[1]);
 
+<<<<<<< HEAD
 	// check if valid -- if not scanf again (try do-while)
+=======
+	// check if valid -- if not return on line 60 (try do-while)
+>>>>>>> 2d80e36817990f3fa92a44e538dedf8edfbe2363
 
 
 	// if valid
