@@ -19,8 +19,9 @@ void ignore_spaces(char indices[]) {
 int* get_idx() { // return array of two integers (user input inside the function)
 	// get value, ignore spaces
 	char indices[MAX_INPUT_SIZE];			
-	fgets(indices, MAX_INPUT_SIZE, stdin);
-	indices[strlen(indices) - 1] = '\0';
+	//fgets(indices, MAX_INPUT_SIZE, stdin);
+	scanf("%[^\n]", indices);
+	//indices[strlen(indices) - 1] = '\0';
 	ignore_spaces(indices);
 
 	// assign idx
@@ -75,8 +76,8 @@ void pass_turn(const char* current_player) {
 }
 
 //test main
-
-int main() {
+/*
+  int main() {
 
 	int* idx;
 	idx = get_idx();
@@ -84,8 +85,8 @@ int main() {
 	return 0;
 		
 }
+*/
 
-/*
 int main() {
 	char board[MAX_SIZE][2 * MAX_SIZE];
 	const char player_1 = 1, mark_1 = 'X', player_2 = 2, mark_2 = 'O';
@@ -114,4 +115,3 @@ int main() {
 	printf("There is a Tie!\n");
 	return 0;
 }
-*/
