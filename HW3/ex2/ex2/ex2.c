@@ -11,6 +11,10 @@
 void make_it_lower(char* str) {
 	/*
 	check if the character is letter anf if indeed make it lower */
+	while (*str) {
+		*str = tolower(*str);
+		str++ ;
+	}
 }
 
 void sort_str(char* str) {
