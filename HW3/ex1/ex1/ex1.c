@@ -59,8 +59,11 @@ void update_board(char board[][2 * MAX_SIZE], const char* current_mark, const in
 	int idx[2] = { 0 };
 	get_idx(idx);
 
-	// check if valid 
+	// check if valid -- if not return on line 60
 
+
+	// if valid
+	board[idx[0] - 1][2 * (idx[1] - 1)] = *current_mark;
 }
 int check_won(const char board[][2 * MAX_SIZE], const char* current_mark, const int N) {
 	/* return 1 if full row/coloumn/diagnol with mark*/
