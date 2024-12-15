@@ -3,29 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 #define MAX_SIZE 10
-#define MAX_INPUT_SIZE 100
 
-void ignore_spaces(char indices[]) {
-	char* temp = indices;
-	while (*temp) {
-		if (*temp != ' ') {
-			*indices = *temp;
-			indices++;
-		}
-		temp++;
-	}
-	*indices = '\0';
-}
-void get_idx(int idx[]) { // gets an array of two int, and assigns two values (from input)
-	// get value, ignore spaces
-	char indices[MAX_INPUT_SIZE];			
-	scanf(" %[^\n]", indices);
-	ignore_spaces(indices);
-
-	// assign idx
-	idx[0] = (int)(*(strchr(indices, ',') - 1)) - '0'; // search for first comma --> take the value of the pervious char --> casting --> convert ASCII to int (like in rec 6)
-	idx[1] = (int)indices[strlen(indices) - 1] - '0';	// similar to line 28, but always will appear at the end of the string.
-}
 void create_board(char board[][2 * MAX_SIZE], const int N) {
 	/* Assign to board: Nx2N nested array. (no '\n' in assignment) */
 	for (int i = 0; i < N; i++) {
@@ -57,9 +35,9 @@ void update_board(char board[][2 * MAX_SIZE], const char* current_mark, const in
 	
 	// ask for indices
 	int idx[2] = { 0 };
-	get_idx(idx);
+	scanf(" %d , %d", &idx[0], &idx[1]);
 
-	// check if valid -- if not return on line 60
+	// check if valid -- if not scanf again (try do-while)
 
 
 	// if valid
