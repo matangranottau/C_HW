@@ -3,8 +3,9 @@
 #include <ctype.h>
 #include <string.h>
 #define MAX_SIZE 10
+#define MAX_INDICES_SIZE 100
 
-void create_board(char board[][2 * MAX_SIZE], int N) {
+void create_board(char board[][2 * MAX_SIZE], const int N) {
 	/* Assign to board: Nx2N nested array. (no '\n' in assignment) */
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < 2*N; j++) {
@@ -17,7 +18,7 @@ void create_board(char board[][2 * MAX_SIZE], int N) {
 		}
 	}
 }
-void print_board(const char board[][2 * MAX_SIZE],const int N) {
+void print_board(const char board[][2 * MAX_SIZE], const int N) {
 	/* Prints board. */
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < 2 * N; j++) {
@@ -26,18 +27,22 @@ void print_board(const char board[][2 * MAX_SIZE],const int N) {
 		printf("\n");
 	}
 }
-void update_board(char board[][2 * MAX_SIZE], const char* current_mark) {
+void update_board(char board[][2 * MAX_SIZE], const char* current_mark, const int N) {
 	/*
 	1. Ask for Indices, and check if valid.
 	2. Sepreates to row and column.
 	3. Updates board in the location, with the current mark.
 	*/
+	char indices[MAX_INDICES_SIZE];
+	scanf("%s", indices);
+
+
 }
-int check_won(const char board[][2 * MAX_SIZE], const char* current_mark) {
+int check_won(const char board[][2 * MAX_SIZE], const char* current_mark, const int N) {
 	/* return 1 if full row/coloumn/diagnol with mark*/
 	return 0;
 }
-void pass_turn(char* current_player) {
+void pass_turn(const char* current_player) {
 	/* Alternate current player and mark*/
 }
 
@@ -65,15 +70,15 @@ int main() {
 	{
 		turn_num++;
 		printf("Player %d, please insert your move :\n", *current_player);
-		update_board(board, current_mark);
+		update_board(board, current_mark, N);
 		print_board(board, N);
-		won = check_won(board, current_mark);
+		won = check_won(board, current_mark ,N);
 		if (!won) {
 			pass_turn(current_player);
 		}
 	} while (!won && turn_num < N * N); // max iterations turn num = N^2
 	if (won) {
-		printf("Player _ is the winner!\n", *current_player);
+		printf("Player %d is the winner!\n", *current_player);
 	}
 	printf("There is a Tie!\n");
 	return 0;
