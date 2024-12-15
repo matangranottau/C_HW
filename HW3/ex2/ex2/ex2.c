@@ -17,9 +17,27 @@ void make_it_lower(char* str) {
 	}
 }
 
-void sort_str(char* str) {
+void sort_str(char str[]) {
 	/* 
 	sort the string according to ascii table*/
+	// create a hist array for all ascii chars (32 - 126)
+	char hist[94] = { 0 };
+	char idx;
+	char* temp = str;
+	// load hist
+	while (*temp) {
+		idx = *temp - ' ';
+		hist[idx]++;
+		temp++;
+	}
+	//unload hist
+	for (int i = 0; i < 94; i++) {
+		while (hist[i] > 0) {
+			*str = 32 + i;
+			hist[i]--;
+			str++;
+		}
+	}
 }
 
 int is_permutation(char* str1, char* str2) {
@@ -28,6 +46,18 @@ int is_permutation(char* str1, char* str2) {
 	(see the function strcmp that he talked about in  recitation 6)*/
 }
 
+/*Tests*/
+#if 0
+int main(){
+	char str[10] = "matan dov";
+	sort_str(str);
+	printf("%s", str);
+	return 0;
+}
+#endif
+
+/*Actual Main*/
+#if 1
 int main() {
 	char search_string[MAX_LEN + 1];
 	char pool[MAX_POOL][MAX_LEN + 1];
@@ -38,7 +68,7 @@ int main() {
 	scanf("%[^\n]", search_string); // no need to validate. scanf reads spaces now
 	make_it_lower(search_string);
 
-	
+
 	printf("Enter the strings pool:\n"); /*entering the pool until EOF*/
 	while (pool < MAX_LEN && scanf("%10s", pool[pool_size]) != EOF) {  //BUG : not Entering while loop
 		make_it_lower(pool[pool_size]);
@@ -67,3 +97,5 @@ int main() {
 
 
 }
+#endif // 0
+
