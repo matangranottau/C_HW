@@ -16,6 +16,20 @@ void ignore_spaces(char indices[]) {
 	}
 	*indices = '\0';
 }
+int* get_idx() { // return array of two integers (user input inside the function)
+	// get value, ignore spaces
+	char indices[MAX_INPUT_SIZE];			
+	fgets(indices, MAX_INPUT_SIZE, stdin);
+	indices[strlen(indices) - 1] = '\0';
+	ignore_spaces(indices);
+
+	// assign idx
+	int idx1, idx2;
+	idx1 = (int)(*(strchr(indices, ',') - 1)) - '0'; // search for first comma --> take the value of the pervious char --> casting --> convert ASCII to int (like in rec 6)
+	idx2 = (int)indices[strlen(indices) - 1] - '0';	// similar to line 28, but always will appear at the end of the string.
+	int idx[2] = { idx1, idx2 };
+	return idx;
+}
 void create_board(char board[][2 * MAX_SIZE], const int N) {
 	/* Assign to board: Nx2N nested array. (no '\n' in assignment) */
 	for (int i = 0; i < N; i++) {
@@ -40,14 +54,18 @@ void print_board(const char board[][2 * MAX_SIZE], const int N) {
 }
 void update_board(char board[][2 * MAX_SIZE], const char* current_mark, const int N) {
 	/*
-	1. Ask for Indices, and check if valid.
-	2. Sepreates to row and column.
+	1. Ask for Indices,cleans and assign : [ *(idx) -> row_idx , *(idx+1) -> column_idx].
+	2. check if valid
 	3. Updates board in the location, with the current mark.
 	*/
-	char input[MAX_INPUT_SIZE];
-	fgets(input, MAX_INPUT_SIZE, stdin); // reads with spaces
-	input[strlen(input) - 1] = '\0';    // Null terminate string
-	ignore_spaces(input);
+	
+	// ask for indices
+	int* idx;
+	idx = get_idx();
+
+	// check if valid 
+
+}
 int check_won(const char board[][2 * MAX_SIZE], const char* current_mark, const int N) {
 	/* return 1 if full row/coloumn/diagnol with mark*/
 	return 0;
@@ -56,19 +74,20 @@ void pass_turn(const char* current_player) {
 	/* Alternate current player and mark*/
 }
 
-/*Testing
+//test main
+
 int main() {
-	char indices[MAX_INDICES_SIZE];
-	fgets(indices, MAX_INDICES_SIZE, stdin);
-	indices[strlen(indices) - 1] = '\0';
-	printf("%s\n", indices);
-	ignore_spaces(indices);
-	printf("%s", indices);
+	int v;
+	scanf("%d", &v);
+	printf("hello");
+	int* idx;
+	idx = get_idx();
+	printf("%d %d", *idx, *(idx + 1));
 	return 0;
 		
 }
-*/
 
+/*
 int main() {
 	char board[MAX_SIZE][2 * MAX_SIZE];
 	const char player_1 = 1, mark_1 = 'X', player_2 = 2, mark_2 = 'O';
@@ -97,3 +116,4 @@ int main() {
 	printf("There is a Tie!\n");
 	return 0;
 }
+*/
