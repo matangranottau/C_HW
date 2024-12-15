@@ -35,7 +35,7 @@ int main() {
 	int count = 0;
 
 	printf("Enter the search string:\n"); /* get the search string*/
-	scanf("%10s", search_string);
+	scanf("%[^\n]", search_string); // no need to validate. scanf reads spaces now
 	make_it_lower(search_string);
 
 	
