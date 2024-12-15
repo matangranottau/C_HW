@@ -19,8 +19,7 @@ void ignore_spaces(char indices[]) {
 int* get_idx() { // return array of two integers (user input inside the function)
 	// get value, ignore spaces
 	char indices[MAX_INPUT_SIZE];			
-	fgets(indices, MAX_INPUT_SIZE, stdin);
-	indices[strlen(indices) - 1] = '\0';
+	scanf("%[^\n]", indices);
 	ignore_spaces(indices);
 
 	// assign idx
