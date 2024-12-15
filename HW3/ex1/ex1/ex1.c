@@ -3,8 +3,19 @@
 #include <ctype.h>
 #include <string.h>
 #define MAX_SIZE 10
-#define MAX_INDICES_SIZE 100
+#define MAX_INPUT_SIZE 100
 
+void ignore_spaces(char indices[]) {
+	char* temp = indices;
+	while (*temp) {
+		if (*temp != ' ') {
+			*indices = *temp;
+			indices++;
+		}
+		temp++;
+	}
+	*indices = '\0';
+}
 void create_board(char board[][2 * MAX_SIZE], const int N) {
 	/* Assign to board: Nx2N nested array. (no '\n' in assignment) */
 	for (int i = 0; i < N; i++) {
@@ -33,11 +44,10 @@ void update_board(char board[][2 * MAX_SIZE], const char* current_mark, const in
 	2. Sepreates to row and column.
 	3. Updates board in the location, with the current mark.
 	*/
-	char indices[MAX_INDICES_SIZE];
-	scanf("%s", indices);
-
-
-}
+	char input[MAX_INPUT_SIZE];
+	fgets(input, MAX_INPUT_SIZE, stdin); // reads with spaces
+	input[strlen(input) - 1] = '\0';    // Null terminate string
+	ignore_spaces(input);
 int check_won(const char board[][2 * MAX_SIZE], const char* current_mark, const int N) {
 	/* return 1 if full row/coloumn/diagnol with mark*/
 	return 0;
@@ -46,10 +56,14 @@ void pass_turn(const char* current_player) {
 	/* Alternate current player and mark*/
 }
 
-/* Testing #1
+/*Testing
 int main() {
-	char board[MAX_SIZE][2 * MAX_SIZE];
-	create_board(board, 8);
+	char indices[MAX_INDICES_SIZE];
+	fgets(indices, MAX_INDICES_SIZE, stdin);
+	indices[strlen(indices) - 1] = '\0';
+	printf("%s\n", indices);
+	ignore_spaces(indices);
+	printf("%s", indices);
 	return 0;
 		
 }
