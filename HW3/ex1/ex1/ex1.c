@@ -77,6 +77,7 @@ void pass_turn(const char* current_player) {
 //test main
 
 int main() {
+
 	int* idx;
 	idx = get_idx();
 	printf("%d %d", *idx, *(idx + 1));
