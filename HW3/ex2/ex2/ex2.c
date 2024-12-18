@@ -74,7 +74,7 @@ int main() {
 
 
 	printf("Enter the strings pool:\n"); /*entering the pool until EOF*/
-	while (scanf("%10s", pool[pool_size]) != EOF ) {  //BUG : not Entering while loop
+	while (scanf("%10s", pool[pool_size]) != EOF && pool < MAX_LEN ) {  //BUG : not Entering while loop
 		make_it_lower(pool[pool_size]);
 		pool_size++;
 

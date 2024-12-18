@@ -72,15 +72,14 @@ int check_won(const char board[][2 * MAX_SIZE], const char* current_mark, const 
 	return 0;
 }
 void pass_turn( char* current_player,  char player_1,  char player_2,char* current_mark, char mark_1, char mark_2 ) {
-	if (*current_player == player_1) {
-		*current_player = player_2;
-		*current_mark = mark_2;
+	if(*current_player == '1') {
+		current_player = '2';
+		current_mark = 'O';
 	}
-	else{
-		*current_player = player_1;
-		*current_mark = mark_1;
+	current_player ='1';
+	current_mark = 'X';
 	}
-}
+
 
 //test main
 /*
