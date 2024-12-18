@@ -74,7 +74,7 @@ int main() {
 
 
 	printf("Enter the strings pool:\n"); /*entering the pool until EOF*/
-	while (pool < MAX_LEN && scanf("%10s", pool[pool_size]) != EOF) {  //BUG : not Entering while loop
+	while (scanf("%10s", pool[pool_size]) != EOF ) {  //BUG : not Entering while loop
 		make_it_lower(pool[pool_size]);
 		pool_size++;
 
@@ -83,10 +83,10 @@ int main() {
 	char sorted_search[MAX_LEN + 1]; /* sort every pool*/
 	strcpy(sorted_search, search_string);
 	sort_str(sorted_search);
-	/*BUG : Dont forget to sort the pool itself!*/
 	for (int i = 0; i < pool; i++) { /* if is permutation add 1*/
 		char temp[MAX_LEN + 1];
 		strcpy(temp, pool[i]);
+		sort_str(temp);
 		if (is_permutation(sorted_search, temp)) {
 			count++;
 		}
