@@ -41,16 +41,45 @@ void update_board(char board[][2 * MAX_SIZE], const char* current_mark, const in
 	// check if valid -- if not scanf again (try do-while)
 
 
-
 	// if valid
-	board[idx[0] - 1][2 * (idx[1] - 1)] = *current_mark;
+	 board[idx[0] - 1][2 * (idx[1] - 1)] = *current_mark;
 }
 int check_won(const char board[][2 * MAX_SIZE], const char* current_mark, const int N) {
-	/* return 1 if full row/coloumn/diagnol with mark*/
+	// check rows win or columns or diagonal win
+	int row_win = 1, column_win = 1;
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			if (board[i][j] != *current_mark) {
+				row_win = 0;
+			}
+			if (board[j][i] != *current_mark) {
+				column_win = 0;
+			}
+		}
+	}
+	int diag1_win = 1, diag2_win = 1;
+	for (int i = 0; i < N; i++) {
+		if (board[i][i] != *current_mark) {
+			diag1_win = 0;
+		}
+		if (board[i][N - 1 - i] != *current_mark) {
+			diag2_win = 0;
+		}
+	}
+	if (row_win || column_win || diag1_win || diag2_win) {
+		return 1;
+	}
 	return 0;
 }
-void pass_turn(const char* current_player) {
-	/* Alternate current player and mark*/
+void pass_turn( char* current_player,  char player_1,  char player_2,char* current_mark, char mark_1, char mark_2 ) {
+	if (*current_player == player_1) {
+		*current_player = player_2;
+		*current_mark = mark_2;
+	}
+	else{
+		*current_player = player_1;
+		*current_mark = mark_1;
+	}
 }
 
 //test main
@@ -84,11 +113,12 @@ int main() {
 		print_board(board, N);
 		won = check_won(board, current_mark ,N);
 		if (!won) {
-			pass_turn(current_player);
+			pass_turn(current_player, player_1,player_2,current_mark,mark_1,mark_2);
 		}
 	} while (!won && turn_num < N * N); // max iterations turn num = N^2
 	if (won) {
 		printf("Player %d is the winner!\n", *current_player);
+		return 0;
 	}
 	printf("There is a Tie!\n");
 	return 0;
