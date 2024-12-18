@@ -46,16 +46,18 @@ void update_board(char board[][2 * MAX_SIZE], const char* current_mark, const in
 }
 int check_won(const char board[][2 * MAX_SIZE], const char* current_mark, const int N) {
 	// check rows win or columns or diagonal win
-	int row_win = 1, column_win = 1;
+	int row_win = 1, column_win = 0;
 	for (int i = 0; i < N; i++) {
+		row_win = 1;
 		for (int j = 0; j < N; j++) {
-			if (board[i][j] != *current_mark) {
+			if (board[i][2*j] != *current_mark) {
 				row_win = 0;
-			}
-			if (board[j][i] != *current_mark) {
-				column_win = 0;
+				break;
 			}
 		}
+		/*if (board[j][2 * i] != *current_mark) {
+			column_win = 0;
+		}*/
 	}
 	int diag1_win = 1, diag2_win = 1;
 	for (int i = 0; i < N; i++) {

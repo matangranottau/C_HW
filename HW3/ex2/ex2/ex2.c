@@ -12,8 +12,10 @@ void make_it_lower(char* str) {
 	/*
 	check if the character is letter anf if indeed make it lower */
 	while (*str) {
-		*str = tolower(*str);
-		str++ ;
+		if (isalpha(*str)) {
+			*str = tolower(*str);
+			str++;
+		}
 	}
 }
 
@@ -70,11 +72,12 @@ int main() {
 
 	printf("Enter the search string:\n"); /* get the search string*/
 	scanf("%[^\n]", search_string); // no need to validate. scanf reads spaces now
+	getchar();
 	make_it_lower(search_string);
 
 
 	printf("Enter the strings pool:\n"); /*entering the pool until EOF*/
-	while (scanf("%10s", pool[pool_size]) != EOF ) {  //BUG : not Entering while loop
+	while (scanf("%[^\n]", pool[pool_size]) != EOF ) {  //BUG : not Entering while loop
 		make_it_lower(pool[pool_size]);
 		pool_size++;
 
@@ -83,7 +86,7 @@ int main() {
 	char sorted_search[MAX_LEN + 1]; /* sort every pool*/
 	strcpy(sorted_search, search_string);
 	sort_str(sorted_search);
-	for (int i = 0; i < pool; i++) { /* if is permutation add 1*/
+	for (int i = 0; i < pool_size; i++) { /* if is permutation add 1*/
 		char temp[MAX_LEN + 1];
 		strcpy(temp, pool[i]);
 		sort_str(temp);
