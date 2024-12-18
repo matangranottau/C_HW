@@ -14,8 +14,8 @@ void make_it_lower(char* str) {
 	while (*str) {
 		if (isalpha(*str)) {
 			*str = tolower(*str);
-			str++;
 		}
+		str++;
 	}
 }
 
@@ -71,14 +71,14 @@ int main() {
 	int count = 0;
 
 	printf("Enter the search string:\n"); /* get the search string*/
-	scanf("%[^\n]", search_string); // no need to validate. scanf reads spaces now
-	getchar();
+	scanf(" %[^\n]", search_string); // no need to validate. scanf reads spaces now
 	make_it_lower(search_string);
 
 
 	printf("Enter the strings pool:\n"); /*entering the pool until EOF*/
-	while (scanf("%[^\n]", pool[pool_size]) != EOF ) {  //BUG : not Entering while loop
-		make_it_lower(pool[pool_size]);
+	while (scanf(" %[^\n]", pool[pool_size]) != EOF ) {  //BUG : not Entering while loop
+		//make_it_lower(pool[pool_size]);
+
 		pool_size++;
 
 
