@@ -46,16 +46,18 @@ void update_board(char board[][2 * MAX_SIZE], const char* current_mark, const in
 }
 int check_won(const char board[][2 * MAX_SIZE], const char* current_mark, const int N) {
 	// check rows win or columns or diagonal win
-	int row_win = 1, column_win = 1;
+	int row_win = 1, column_win = 0;
 	for (int i = 0; i < N; i++) {
+		row_win = 1;
 		for (int j = 0; j < N; j++) {
-			if (board[i][j] != *current_mark) {
+			if (board[i][2*j] != *current_mark) {
 				row_win = 0;
-			}
-			if (board[j][i] != *current_mark) {
-				column_win = 0;
+				break;
 			}
 		}
+		/*if (board[j][2 * i] != *current_mark) {
+			column_win = 0;
+		}*/
 	}
 	int diag1_win = 1, diag2_win = 1;
 	for (int i = 0; i < N; i++) {
@@ -71,14 +73,16 @@ int check_won(const char board[][2 * MAX_SIZE], const char* current_mark, const 
 	}
 	return 0;
 }
-void pass_turn( char* current_player,  char player_1,  char player_2,char* current_mark, char mark_1, char mark_2 ) {
-	if(*current_player == '1') {
-		current_player = '2';
-		current_mark = 'O';
+void pass_turn( char* ptr_player, char* ptr_mark) {
+	if (*ptr_player == 1) {
+		*ptr_player = 2;
+		*ptr_mark = 'O';
 	}
-	current_player ='1';
-	current_mark = 'X';
+	else{
+		*ptr_player = 1;
+		*ptr_mark = 'X';
 	}
+}
 
 
 //test main
@@ -95,9 +99,9 @@ int main() {
 
 int main() {
 	char board[MAX_SIZE][2 * MAX_SIZE];
-	const char player_1 = 1, mark_1 = 'X', player_2 = 2, mark_2 = 'O';
-	const char* current_player = &player_1;
-	const char* current_mark = &mark_1;  // const char* - pointer to a constant char (the pointer itself can point on another char const)
+	const char player = 1, mark = 'X';
+	const char* ptr_player = &player;
+	const char* ptr_mark = &mark;  // const char* - pointer to a constant char (the pointer itself can point on another char const)
 	int N, won = 0, turn_num = 0;
 	printf("Please enter the board size N [1-10]:\n");
 	scanf("%d", &N);
@@ -107,16 +111,16 @@ int main() {
 	do
 	{
 		turn_num++;
-		printf("Player %d, please insert your move :\n", *current_player);
-		update_board(board, current_mark, N);
+		printf("Player %d, please insert your move :\n", *ptr_player);
+		update_board(board, ptr_mark, N);
 		print_board(board, N);
-		won = check_won(board, current_mark ,N);
+		won = check_won(board, ptr_mark ,N);
 		if (!won) {
-			pass_turn(current_player, player_1,player_2,current_mark,mark_1,mark_2);
+			pass_turn(ptr_player, ptr_mark);
 		}
 	} while (!won && turn_num < N * N); // max iterations turn num = N^2
 	if (won) {
-		printf("Player %d is the winner!\n", *current_player);
+		printf("Player %d is the winner!\n", *ptr_player);
 		return 0;
 	}
 	printf("There is a Tie!\n");
