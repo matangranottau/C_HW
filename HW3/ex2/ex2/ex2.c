@@ -71,13 +71,14 @@ int main() {
 	int count = 0;
 
 	printf("Enter the search string:\n"); /* get the search string*/
-	scanf(" %[^\n]", search_string); // no need to validate. scanf reads spaces now
+	//scanf(" %[^\n]", search_string); // no need to validate. scanf reads spaces now
+	fgets(search_string,MAX_LEN,stdin);
 	make_it_lower(search_string);
 
 
 	printf("Enter the strings pool:\n"); /*entering the pool until EOF*/
-	while (scanf(" %[^\n]", pool[pool_size]) != EOF ) {  //BUG : not Entering while loop
-		//make_it_lower(pool[pool_size]);
+	while (fgets(pool[pool_size], MAX_LEN, stdin) != NULL) {
+		make_it_lower(pool[pool_size]);
 
 		pool_size++;
 
