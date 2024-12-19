@@ -35,7 +35,7 @@ void update_board(char board[][MAX_SIZE], char current_mark, int N) {
     int row, col;
 
     while (1) {
-        printf("Please insert your move:\n");
+        printf("please insert your move:\n");
         if (scanf("%d,%d", &row, &col) != 2) {
             while (getchar() != '\n');
             printf("Invalid indices, please choose your move again:\n");
