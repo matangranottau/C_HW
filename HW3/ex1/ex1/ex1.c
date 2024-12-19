@@ -25,7 +25,6 @@ void print_board(char board[][MAX_SIZE], int N) {
         }
         printf("\n");
     }
-    printf("\n");
 }
 
 int validate_indices(int row, int col, int N, char board[][MAX_SIZE]) {
