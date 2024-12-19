@@ -38,7 +38,7 @@ void update_board(char board[][MAX_SIZE], char current_mark, int N) {
         printf("Please insert your move:\n");
         if (scanf("%d,%d", &row, &col) != 2) {
             while (getchar() != '\n');
-            printf("Invalid input, please choose your move again:\n");
+            printf("Invalid indices, please choose your move again:\n");
             continue;
         }
         row--; col--; // Convert to 0-based index
