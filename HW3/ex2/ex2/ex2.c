@@ -51,6 +51,12 @@ int is_permutation(char* str1, char* str2) {
 	}
 	return 0;
 }
+void remove_newline(char* str) {
+	size_t len = strlen(str);
+	if (len > 0 && str[len - 1] == '\n') {
+		str[len - 1] = '\0';
+	}
+}
 
 /*Tests*/
 #if 0
@@ -73,11 +79,13 @@ int main() {
 	printf("Enter the search string:\n"); /* get the search string*/
 	//scanf(" %[^\n]", search_string); // no need to validate. scanf reads spaces now
 	fgets(search_string,MAX_LEN,stdin);
+	remove_newline(search_string);
 	make_it_lower(search_string);
 
 
 	printf("Enter the strings pool:\n"); /*entering the pool until EOF*/
 	while (fgets(pool[pool_size], MAX_LEN, stdin) != NULL) {
+		remove_newline(pool[pool_size]);
 		make_it_lower(pool[pool_size]);
 
 		pool_size++;
