@@ -40,12 +40,7 @@ void update_board(char board[][MAX_SIZE], char current_mark, int N) {
     int row, col;
 
     while (1) {
-        printf("please insert your move:\n");
-        if (scanf("%d,%d", &row, &col) != 2) {
-            while (getchar() != '\n');
-            printf("Invalid indices, please choose your move again:\n");
-            continue;
-        }
+        scanf(" %d , %d", &row, &col);
         row--; col--; // Convert to 0-based index
 
         if (validate_indices(row, col, N, board)) {
@@ -100,7 +95,7 @@ int main() {
 
     while (turn_num < max_turns) {
         current_mark = (current_player == '1') ? player_1_mark : player_2_mark;
-        printf("Player %c, ", current_player); // part one in the sentence
+        printf("Player %c, please insert your move:\n", current_player); // part one in the sentence
 
         update_board(board, current_mark, N);
         print_board(board, N);
