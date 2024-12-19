@@ -94,7 +94,7 @@ int main() {
 
     while (turn_num < max_turns) {
         current_mark = (current_player == '1') ? player_1_mark : player_2_mark;
-        printf("Player %c, please insert your move:\n", current_player); // part one in the sentence
+        printf("Player %c, please insert your move:\n", current_player);
 
         update_board(board, current_mark, N);
         print_board(board, N);
