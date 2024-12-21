@@ -72,14 +72,16 @@ int main(){
 #if 1
 int main() {
 	char search_string[MAX_LEN + 1];
+	char printed_str_search_string[MAX_LEN + 1];
 	char pool[MAX_POOL][MAX_LEN + 1];
 	int pool_size = 0;
 	int count = 0;
 
 	printf("Enter the search string:\n"); /* get the search string*/
 	//scanf(" %[^\n]", search_string); // no need to validate. scanf reads spaces now
-	fgets(search_string,MAX_LEN,stdin);
+	fgets(search_string, MAX_LEN, stdin);
 	remove_newline(search_string);
+	strcpy(printed_str_search_string, search_string);
 	make_it_lower(search_string);
 
 
@@ -105,11 +107,9 @@ int main() {
 
 	}
 
-	printf("Number of permutations of \"%s\" in the strings pool is: %d\n", search_string, count);
+	printf("Number of permutations of \"%s\" in the strings pool is: %d\n", printed_str_search_string, count);
 
 	return 0;
-
-
 
 
 }
