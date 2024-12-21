@@ -79,14 +79,14 @@ int main() {
 
 	printf("Enter the search string:\n"); /* get the search string*/
 	//scanf(" %[^\n]", search_string); // no need to validate. scanf reads spaces now
-	fgets(search_string, MAX_LEN, stdin);
+	fgets(search_string, MAX_LEN+1, stdin);
 	remove_newline(search_string);
 	strcpy(printed_str_search_string, search_string);
 	make_it_lower(search_string);
 
 
 	printf("Enter the strings pool:\n"); /*entering the pool until EOF*/
-	while (fgets(pool[pool_size], MAX_LEN, stdin) != NULL) {
+	while (fgets(pool[pool_size], MAX_LEN + 1, stdin) != NULL) {
 		remove_newline(pool[pool_size]);
 		make_it_lower(pool[pool_size]);
 
