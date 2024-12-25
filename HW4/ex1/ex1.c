@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define INTIAL_SIZE 10
 
 // Define a struct for Student
 typedef struct Student {
@@ -11,6 +12,30 @@ typedef struct Student {
     float GPA;
     struct Student* next;  // Pointer to the next student in the list
 } Student;
+
+// Helper function to get string with unknown size
+char* readline() {
+    int index = 0, c, capacity = INTIAL_SIZE;
+    char* buffer = (char*)malloc(capacity * sizeof(char));
+
+    if (buffer == NULL) {
+        return NULL;
+    }
+
+    for (c = getchar(); c != '\n'; c = getchar()) {
+        if (index == capacity - 1) {
+            buffer = (char*)realloc(buffer, capacity * 2 * sizeof(char));
+            if (buffer == NULL) {
+                return NULL;
+            }
+            capacity *= 2;
+        }
+        buffer[index++] = c;
+    }
+    buffer[index] = '\0';
+    return buffer;
+}
+
 
 // Function to create a new student
 Student* createStudent(int ID, const char* name, int age, float GPA) {
@@ -26,7 +51,9 @@ Student* createStudent(int ID, const char* name, int age, float GPA) {
 
 // Function to create a linked list of students
 Student* createStudentList() {
-
+    int ID, age;
+    float GPA;
+    char* name = readline();
 
 }
 
