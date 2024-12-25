@@ -51,9 +51,12 @@ Student* createStudent(int ID, const char* name, int age, float GPA) {
 
 // Function to create a linked list of students
 Student* createStudentList() {
-    int ID, age;
+    int ID, age, student_num;
     float GPA;
     char* name = readline();
+    printf("Enter number of students: ");
+    scanf("%d", &student_num); // NEED CHECK ABOUT SPACES AND WHEN INPUT VALID
+    // to be continued
 
 }
 
