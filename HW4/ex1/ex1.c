@@ -70,7 +70,7 @@ Student* deleteLowestGPA(Student* head) {
 void printAllStudents(Student* head) {
     Student* curr = head;
     while (curr != NULL) {
-        printf("ID: %d\nName: %s\nAge: %d\nGpa: %.2f\n", curr->ID, curr->name, curr->age, curr->GPA);
+        printf("ID: %d\nName: %s\nAge: %d\nGPA: %.2f\n", curr->ID, curr->name, curr->age, curr->GPA);
         curr = curr->next;
     }
 }
