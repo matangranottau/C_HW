@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,28 +14,75 @@ typedef struct Student {
 
 // Function to create a new student
 Student* createStudent(int ID, const char* name, int age, float GPA) {
+    // initialize everything
+    Student* new_student = (Student*)malloc(sizeof(Student));
+    new_student->ID = ID;
+    strcpy(new_student->name, name);
+    new_student->age = age;
+    new_student->GPA = GPA;
+    return new_student;
 }
 
 
 // Function to create a linked list of students
 Student* createStudentList() {
 
+
 }
 
 // Function to find the student with the highest GPA
 Student* findTopStudent(Student* head) {
+    // run  the list and return the student with highest GPA
+    Student* curr = head;
+    Student* top = head;
+    while (curr != NULL) {
+        if (curr->GPA > top->GPA) {
+            top = curr;
+        }
+        curr = curr -> next;
+    }
+    return top;
 }
 
 // Function to delete the student with the lowest GPA
 Student* deleteLowestGPA(Student* head) {
+    // run  the list and Delete the student with lowest GPA
+    Student* curr = head, *prev = NULL, *minprev = NULL, *minStudent = head;
+    while(curr != NULL){
+        if (curr->GPA < minStudent->GPA) {
+            minStudent = curr;
+            minprev = prev;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+    if (minprev == NULL) {
+        head = head->next;
+    }
+    else {
+        minprev->next = minStudent->next;
+    }
+    free(minStudent);
+    return head;
 }
 
 // Function to print all students
 void printAllStudents(Student* head) {
+    Student* curr = head;
+    while (curr != NULL) {
+        printf("ID: %d\nName: %s\nAge: %d\nGpa: %.2f\n", curr->ID, curr->name, curr->age, curr->GPA);
+        curr = curr->next;
+    }
 }
 
 // Function to free the memory of the entire student list
 void freeStudentList(Student* head) {
+    Student* curr = head;
+    while (curr != NULL) {
+        Student* temp = curr;
+        curr = curr->next;
+        free(temp);
+    }
 }
 
 int main() {
