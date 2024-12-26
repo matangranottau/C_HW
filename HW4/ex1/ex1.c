@@ -14,7 +14,7 @@ typedef struct Student {
 } Student;
 
 // Helper function to get string with unknown size
-char* readline() {
+//char* readline() {
     int index = 0, c, capacity = INTIAL_SIZE;
     char* buffer = (char*)malloc(capacity * sizeof(char));
 
@@ -54,7 +54,7 @@ Student* createStudent(int ID, const char* name, int age, float GPA) {
 Student* createStudentList() {
     int ID, age, student_num;
     float GPA;
-    char* name;
+    char name[50];
     Student *p_head = NULL, *p_last = NULL;
     printf("Enter number of students: ");
     scanf("%d", &student_num); // NEED CHECK ABOUT SPACES AND WHEN INPUT VALID
@@ -65,7 +65,7 @@ Student* createStudentList() {
         scanf("%d", &ID);
 
         printf("Name: ");
-        name = readline();
+        scanf("%s", name);
 
         printf("Age: ");
         scanf("%d", &age);
