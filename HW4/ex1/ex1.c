@@ -45,6 +45,7 @@ Student* createStudent(int ID, const char* name, int age, float GPA) {
     strcpy(new_student->name, name);
     new_student->age = age;
     new_student->GPA = GPA;
+    new_student->next = NULL;
     return new_student;
 }
 
@@ -53,11 +54,36 @@ Student* createStudent(int ID, const char* name, int age, float GPA) {
 Student* createStudentList() {
     int ID, age, student_num;
     float GPA;
-    char* name = readline();
+    char* name;
+    Student *p_head = NULL, *p_last = NULL;
     printf("Enter number of students: ");
     scanf("%d", &student_num); // NEED CHECK ABOUT SPACES AND WHEN INPUT VALID
-    // to be continued
+    for (int i = 0; i < student_num; i++) {
+        printf("Enter details for student %d:\n", i + 1);
 
+        printf("ID: ");
+        scanf("%d", &ID);
+
+        printf("Name: ");
+        name = readline();
+
+        printf("Age: ");
+        scanf("%d", &age);
+
+        printf("GPA: ");
+        scanf("%f", &GPA);
+
+        Student *new_student = createStudent(ID, name, age, GPA);
+        
+        if (p_head == NULL){  // If List Empty
+            p_head = new_student;
+        }
+        else {
+            (*p_last).next = new_student;
+        }
+        p_last = new_student;
+    }
+    return p_head;
 }
 
 // Function to find the student with the highest GPA
