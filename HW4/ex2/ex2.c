@@ -44,6 +44,13 @@ double perimeter(const Triangle* t) {
 
 // Function to calculate the area of a triangle in 3D 
 double area(const Triangle* t) {
+    /* area = (||AB|| X  ||AC|| ) / 2 */
+    double ABx = t->q.x - t->p.x, ABy = t->q.y - t->p.y, ABz = t->q.z - t->p.z;
+    double ACx = t->r.x - t->p.x, ACy = t->r.y - t->p.y, ACz = t->r.z - t->p.z;
+    double cross_prod_x = ABy * ACz - ABz * ACy, cross_prod_y = ABz * ACx - ABx * ACz, cross_prod_z = ABx * ACy - ABy * ACx;
+    double numerator = sqrt(sq(cross_prod_x) + sq(cross_prod_y) + sq(cross_prod_z));
+    double Area = numerator / 2.0;
+    return Area;
 }
 
 int main() {
