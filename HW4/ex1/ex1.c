@@ -13,28 +13,6 @@ typedef struct Student {
     struct Student* next;  // Pointer to the next student in the list
 } Student;
 
-// Helper function to get string with unknown size
-//char* readline() {
-    int index = 0, c, capacity = INTIAL_SIZE;
-    char* buffer = (char*)malloc(capacity * sizeof(char));
-
-    if (buffer == NULL) {
-        return NULL;
-    }
-
-    for (c = getchar(); c != '\n'; c = getchar()) {
-        if (index == capacity - 1) {
-            buffer = (char*)realloc(buffer, capacity * 2 * sizeof(char));
-            if (buffer == NULL) {
-                return NULL;
-            }
-            capacity *= 2;
-        }
-        buffer[index++] = c;
-    }
-    buffer[index] = '\0';
-    return buffer;
-}
 
 
 // Function to create a new student
@@ -122,11 +100,16 @@ Student* deleteLowestGPA(Student* head) {
     return head;
 }
 
+// Function to print given student
+void printStudent(Student* student) {
+    printf("ID: %d\nName: %s\nAge: %d\nGPA: %.2f\n", student->ID, student->name, student->age, student->GPA);
+}
+
 // Function to print all students
 void printAllStudents(Student* head) {
     Student* curr = head;
     while (curr != NULL) {
-        printf("ID: %d\nName: %s\nAge: %d\nGPA: %.2f\n", curr->ID, curr->name, curr->age, curr->GPA);
+        printStudent(curr);
         curr = curr->next;
     }
 }
