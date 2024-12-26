@@ -67,6 +67,7 @@ Student* createStudentList() {
 // Function to find the student with the highest GPA
 Student* findTopStudent(Student* head) {
     // run  the list and return the student with highest GPA
+    printf("\n");
     Student* curr = head;
     Student* top = head;
     while (curr != NULL) {
@@ -102,7 +103,10 @@ Student* deleteLowestGPA(Student* head) {
 
 // Function to print given student
 void printStudent(Student* student) {
-    printf("ID: %d\nName: %s\nAge: %d\nGPA: %.2f\n", student->ID, student->name, student->age, student->GPA);
+    printf("ID: %d\nName: %s\nAge: %d\nGPA: %.2f", student->ID, student->name, student->age, student->GPA);
+    if (student->next != NULL) {
+        printf("\n");
+    }
 }
 
 // Function to print all students
