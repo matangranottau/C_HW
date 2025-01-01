@@ -19,6 +19,10 @@ typedef struct Student {
 Student* createStudent(int ID, const char* name, int age, float GPA) {
     // initialize everything
     Student* new_student = (Student*)malloc(sizeof(Student));
+    if (new_student == NULL) {
+        printf("Memory Allocation Failure.\n");
+        return NULL;
+    }
     new_student->ID = ID;
     strcpy(new_student->name, name);
     new_student->age = age;
