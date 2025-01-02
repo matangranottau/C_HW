@@ -63,8 +63,16 @@ Student* createStudentList() {
         printf("Age: ");
         scanf("%d", &age);
 
-        printf("GPA: ");
-        scanf("%f", &GPA);
+        do {
+            printf("GPA: ");
+            scanf("%f", &GPA);
+
+            if (GPA <= 0) {
+                printf("GPA must be positive, try again!\n");
+            }
+        } while (GPA <= 0);
+
+        
 
         Student *new_student = createStudent(ID, name, age, GPA);
         
