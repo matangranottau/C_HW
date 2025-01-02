@@ -13,7 +13,16 @@ typedef struct Student {
     struct Student* next;  // Pointer to the next student in the list
 } Student;
 
-
+int is_ID_Unique(const int ID, const Student* head) {
+    while (head != NULL) {
+        if (head->ID == ID) {
+            printf("ID already exists, try again!\n");
+            return 0;
+        }
+        head = head->next;
+    }
+    return 1;
+}
 
 // Function to create a new student
 Student* createStudent(int ID, const char* name, int age, float GPA) {
@@ -43,9 +52,11 @@ Student* createStudentList() {
     for (int i = 0; i < student_num; i++) {
         printf("Enter details for student %d:\n", i + 1);
 
-        printf("ID: ");
-        scanf("%d", &ID);
-
+        do {
+            printf("ID: ");
+            scanf("%d", &ID);
+        } while (!is_ID_Unique(ID, p_head));
+      
         printf("Name: ");
         scanf("%s", name);
 
