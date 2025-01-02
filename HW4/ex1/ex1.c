@@ -88,7 +88,7 @@ Student* deleteLowestGPA(Student* head) {
     // run  the list and Delete the student with lowest GPA
     Student* curr = head, *prev = NULL, *minprev = NULL, *minStudent = head;
     while(curr != NULL){
-        if (curr->GPA < minStudent->GPA) {
+        if (curr->GPA < minStudent->GPA || curr->GPA == minStudent->GPA && strcmp(curr->name, minStudent->name) < 0) { // strcmp returns negative value if curr.name is smaller
             minStudent = curr;
             minprev = prev;
         }
