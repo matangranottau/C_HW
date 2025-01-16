@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <string.h>
 #define FLAGS_LEN(flags) (sizeof(flags) / sizeof(flag_t))
+#define ENCRYPT_ARG_NUM 4
+#define CENSOR_ARG_NUM 5
+#define PRINT_ERRORS 1
 
 typedef struct {
   const char *short_name;
@@ -18,6 +21,12 @@ static const flag_t flags[] = {{HELP_FLAG, "help", "print this description"},
                                {"-o", "output", "file path"},
                                {"-b", "blacklist", "file path"}};
 
+int isFlag(char* str) {
+    if (str[0] == '-') {
+        return 1;
+    }
+    return 0;
+}
 void print_help() {
   printf("Usage:\n");
   for (int i = 0; i < FLAGS_LEN(flags); i++) {
@@ -28,8 +37,7 @@ void print_help() {
 }
 
 int parse_args(int argc, const char *argv[], command_t *p_cmd) {
-  // TODO
-    // TODO: Check First Valid!!
+    int p_raise = 0, t_raise = 0, i_raise = 0, o_raise = 0, b_raise = 0;
     for (int j = 1; j < argc; j++) {
         if (strcmp(argv[j], "-h") == 0) {  // "-h" help flag (need to ask in forum)
             print_help();
@@ -38,7 +46,15 @@ int parse_args(int argc, const char *argv[], command_t *p_cmd) {
     }
     for (int i = 1; i < argc; i++)
     {
+        if (isFlag(argv[i + 1])) { // Check if value exists (next element is not a flag)
+            return ERR_MISSING_ARG;
+        }
+        // Start Checking which Flags.
         if (strcmp(argv[i], "-p") == 0) { // "-p" operation flag
+            if (p_raise) {
+                return ERR_NUM_ARGS;
+            }
+            p_raise = 1;
             i++;
             if (strcmp(argv[i], "enc") == 0) {
                 p_cmd->op = OP_ENC;
@@ -49,8 +65,15 @@ int parse_args(int argc, const char *argv[], command_t *p_cmd) {
             else if (strcmp(argv[i], "censor") == 0) {
                 p_cmd->op = OP_CENSOR;
             }
+            else {
+                return ERR_BAD_OP;
+            }
         }
-        else if (strcmp(argv[i], "-t") == 0) {
+        else if (strcmp(argv[i], "-t") == 0) { // "-t" encryption type flag
+            if (t_raise) {
+                return ERR_NUM_ARGS;
+            }
+            t_raise = 1;
             i++;
             int num = atoi(argv[i]);
             switch (num)
@@ -71,22 +94,41 @@ int parse_args(int argc, const char *argv[], command_t *p_cmd) {
                 p_cmd->enc_type = ENC_TYPE_LAST;
                 break;
             }
+            if (p_cmd->enc_type == ENC_TYPE_LAST) {
+                return ERR_BAD_ENC_TYPE;
+            }
         }
-        else if (strcmp(argv[i], "-i") == 0) {
+        else if (strcmp(argv[i], "-i") == 0) { // "-i" input path flag
+            if (i_raise) {
+                return ERR_NUM_ARGS;
+            }
+            i_raise = 1;
             p_cmd->input_path = argv[++i];
             //printf("%s\n", p_cmd->input_path);
         }
-        else if (strcmp(argv[i], "-o") == 0) {
+        else if (strcmp(argv[i], "-o") == 0) { // "-o" output path flag
+            if (o_raise) {
+                return ERR_NUM_ARGS;
+            }
+            o_raise = 1;
             p_cmd->output_path = argv[++i];
             //printf("%s\n", p_cmd->output_path);
         }
-        else if (strcmp(argv[i], "-b") == 0) {
+        else if (strcmp(argv[i], "-b") == 0) { // "-b" blacklist path flag
+            if (b_raise) {
+                return ERR_NUM_ARGS;
+            }
+            b_raise = 1;
             p_cmd->blacklist_path = argv[++i];
             //printf("%s\n", p_cmd->blacklist_path);
         }
-        else {
+        else {  // No Flag was found.
             return ERR_UNKNOWN_FLAG;
         }
+        if (argc < 2 * ENCRYPT_ARG_NUM + 1 || argc == 2 * ENCRYPT_ARG_NUM + 1 && b_raise == 1 || argc != 2 * CENSOR_ARG_NUM + 1 && p_cmd->op == OP_CENSOR) { // Not enough arguments
+            return ERR_NUM_ARGS;
+        }
+
     }
   return OK;
 }
