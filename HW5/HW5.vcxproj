@@ -18,6 +18,22 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="hw5_code_skeleton\algs.c" />
+    <ClCompile Include="hw5_code_skeleton\censor.c" />
+    <ClCompile Include="hw5_code_skeleton\encrypt.c" />
+    <ClCompile Include="hw5_code_skeleton\file_utils.c" />
+    <ClCompile Include="hw5_code_skeleton\main.c" />
+    <ClCompile Include="hw5_code_skeleton\parser.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="hw5_code_skeleton\algs.h" />
+    <ClInclude Include="hw5_code_skeleton\censor.h" />
+    <ClInclude Include="hw5_code_skeleton\encrypt.h" />
+    <ClInclude Include="hw5_code_skeleton\error_types.h" />
+    <ClInclude Include="hw5_code_skeleton\file_utils.h" />
+    <ClInclude Include="hw5_code_skeleton\parser.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -126,22 +142,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\hw5_code_skeleton\algs.c" />
-    <ClCompile Include="..\..\..\..\Downloads\hw5_code_skeleton\censor.c" />
-    <ClCompile Include="..\..\..\..\Downloads\hw5_code_skeleton\encrypt.c" />
-    <ClCompile Include="..\..\..\..\Downloads\hw5_code_skeleton\file_utils.c" />
-    <ClCompile Include="..\..\..\..\Downloads\hw5_code_skeleton\main.c" />
-    <ClCompile Include="..\..\..\..\Downloads\hw5_code_skeleton\parser.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\hw5_code_skeleton\algs.h" />
-    <ClInclude Include="..\..\..\..\Downloads\hw5_code_skeleton\censor.h" />
-    <ClInclude Include="..\..\..\..\Downloads\hw5_code_skeleton\encrypt.h" />
-    <ClInclude Include="..\..\..\..\Downloads\hw5_code_skeleton\error_types.h" />
-    <ClInclude Include="..\..\..\..\Downloads\hw5_code_skeleton\file_utils.h" />
-    <ClInclude Include="..\..\..\..\Downloads\hw5_code_skeleton\parser.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

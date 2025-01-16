@@ -15,42 +15,42 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\hw5_code_skeleton\censor.c">
+    <ClCompile Include="hw5_code_skeleton\algs.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\hw5_code_skeleton\encrypt.c">
+    <ClCompile Include="hw5_code_skeleton\censor.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\hw5_code_skeleton\file_utils.c">
+    <ClCompile Include="hw5_code_skeleton\encrypt.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\hw5_code_skeleton\main.c">
+    <ClCompile Include="hw5_code_skeleton\file_utils.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\hw5_code_skeleton\parser.c">
+    <ClCompile Include="hw5_code_skeleton\main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\hw5_code_skeleton\algs.c">
+    <ClCompile Include="hw5_code_skeleton\parser.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\hw5_code_skeleton\algs.h">
+    <ClInclude Include="hw5_code_skeleton\algs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\hw5_code_skeleton\censor.h">
+    <ClInclude Include="hw5_code_skeleton\censor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\hw5_code_skeleton\encrypt.h">
+    <ClInclude Include="hw5_code_skeleton\encrypt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\hw5_code_skeleton\error_types.h">
+    <ClInclude Include="hw5_code_skeleton\error_types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\hw5_code_skeleton\file_utils.h">
+    <ClInclude Include="hw5_code_skeleton\file_utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\hw5_code_skeleton\parser.h">
+    <ClInclude Include="hw5_code_skeleton\parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

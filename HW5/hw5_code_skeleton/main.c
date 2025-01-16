@@ -21,9 +21,11 @@ int main(int argc, const char *argv[]) {
   }
   // TODO: call parse arguments of parser
 	else {
-		command_t* p_cmd;
-		p_cmd = NULL;
-		parse_args(argc, argv, p_cmd);
+		command_t cmd;
+		cmd.input_path = "";
+		cmd.output_path = "";
+		cmd.blacklist_path = "";
+		parse_args(argc, argv, &cmd);
 
 	}
   // TODO: run command - call process operation
