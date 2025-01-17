@@ -48,7 +48,6 @@ int write_data_to_file(const char* output_file_path, const unsigned char* buf,
     if (buf_size == 0) {
         return ERR_BAD_ENC_TYPE;
     }
-    FILE* file = fopen(output_file_path, "wb"); // open file
     FILE* file = fopen(output_file_path, "w"); // open file
     if (file == NULL) {
         return ERR_FILE;
