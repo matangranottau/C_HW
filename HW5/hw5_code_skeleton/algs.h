@@ -13,11 +13,12 @@ typedef enum {
 
 // the different encryption functions
 
-/* TODO: add your decleration here.
- * The signature should look like:
- *
- * int func_name(const unsigned char *data_in, unsigned int size_in, unsigned
- * char *data_out, unsigned int size_out);
- */
+int None(const unsigned char* data_in, unsigned int size_in, unsigned char* data_out, unsigned int size_out);
+
+int Flip_Even(const unsigned char* data_in, unsigned int size_in, unsigned char* data_out, unsigned int size_out);
+
+int Swap_3(const unsigned char* data_in, unsigned int size_in, unsigned char* data_out, unsigned int size_out);
+
+int Rotate_and_center_5(const unsigned char* data_in, unsigned int size_in, unsigned char* data_out, unsigned int size_out);
 
 #endif //__algs_H__

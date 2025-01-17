@@ -1,10 +1,45 @@
 #include "encrypt.h"
 #include "error_types.h"
+#include "file_utils.h"
+#include "algs.h"
 
+int get_size_out(int in_buf_size, encrypt_t enc_type) {
+    if (enc_type == ENC_TYPE_NONE || enc_type == ENC_TYPE_FLIP_EVEN || enc_type == ENC_TYPE_SWAP_3) {
+        return in_buf_size;
+    }
+    else if (enc_type == ENC_TYPE_ROT_AND_CENTER_5) {
+        return 2 * in_buf_size;
+    }
+}
 int encrypt_file(const char *input_file_path, const char *output_file_path,
                  encrypt_t enc_type) {
-  // TODO
-  return OK;
+    unsigned char* in_buf, *out_buf;
+    int in_buf_size = get_file_size(*input_file_path);
+    int out_buf_size = get_size_out(in_buf_size, enc_type);
+    
+    load_data_from_file(input_file_path, &in_buf, &in_buf_size);
+    allocate_buffer(&out_buf, out_buf_size);
+    
+    switch (enc_type)
+    {
+    case ENC_TYPE_NONE:
+        None(in_buf, in_buf_size, out_buf, out_buf_size);
+        break;
+    case ENC_TYPE_FLIP_EVEN:
+        Flip_Even(in_buf, in_buf_size, out_buf, out_buf_size);
+        break;
+    case ENC_TYPE_SWAP_3:
+        Swap_3(in_buf, in_buf_size, out_buf, out_buf_size);
+        break;
+    case ENC_TYPE_ROT_AND_CENTER_5:
+        Rotate_and_center_5(in_buf, in_buf_size, out_buf, out_buf_size);
+        break;
+    default:
+        return ERR_BAD_FUNC_ARG;
+        break;
+    }
+  
+    return OK;
 }
 
 int decrypt_file(const char *input_file_path, const char *output_file_path,

@@ -1,6 +1,9 @@
 #ifndef __FILE_UTILS_H__
 #define __FILE_UTILS_H__
 
+// gives size of file (number of chars)
+int get_file_size(const char *input_file_path);
+
 // dynamically allocate buffer of buf_size
 int allocate_buffer(void **buf, unsigned int buf_size);
 

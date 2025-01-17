@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "file_utils.h"
 #include "error_types.h"
+#include <stdlib.h>
 #include <stdio.h>
 
 #define MAX_WORD_SIZE 256

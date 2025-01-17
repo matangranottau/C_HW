@@ -36,7 +36,6 @@ int main(int argc, const char *argv[]) {
 		parse_args(argc, argv, &cmd);
 		process_operation(cmd);
 	}
-  // TODO: run command - call process operation
 
   return 0;
 }
