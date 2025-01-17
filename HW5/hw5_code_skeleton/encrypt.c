@@ -67,8 +67,7 @@ int decrypt_file(const char *input_file_path, const char *output_file_path,
     else if (enc_type == ENC_TYPE_ROT_AND_CENTER_5) {
         unsigned char* in_buf, * out_buf;
         unsigned int in_buf_size = get_file_size(*input_file_path);
-        unsigned int out_buf_size = 0.5 * in_buf_size;
-
+        unsigned int out_buf_size = in_buf_size / 2 ;
         if (input_file_path == NULL || output_file_path == NULL) {
             return ERR_NULL_PTR;
         }
