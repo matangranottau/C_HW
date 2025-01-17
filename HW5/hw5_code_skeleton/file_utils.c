@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "file_utils.h"
 #include "error_types.h"
 #include <stdlib.h>
@@ -5,54 +6,37 @@
 
 #define MAX_WORD_SIZE 256
 
-int allocate_buffer(void **buf, unsigned int buf_size) {
-    if (buf == NULL) {
-        return ERR_NULL_PTR;
-    }
+int get_file_size(const char* input_file_path) {
+    int size = 0;
+    FILE* fPtrRead = NULL;
     
-    *buf = (char*)malloc(buf_size * sizeof(char)); // Memory allocation for buffer
-
-    if (*buf == NULL) {
-        return ERR_MEMORY;
+    fPtrRead = fopen(input_file_path, "r");
+    if (fPtrRead == NULL) {
+        return ERR_FILE;
     }
+
+    while (!feof(fPtrRead)) {
+        fseek(fPtrRead, sizeof(char), 1); // advance by one char
+        size++;
+    }
+    fclose(fPtrRead);
+
+    return size;
+}
+int allocate_buffer(void **buf, unsigned int buf_size) {
+    
   return OK;
 }
 
 int write_data_to_file(const char *output_file_path, const unsigned char *buf,
                        unsigned int buf_size) {
-    FILE* fPtrWrite = NULL;
-    fPtrWrite = fopen(output_file_path, "w");
     
-    if (buf == NULL) {
-        return ERR_NULL_PTR;
-    }
-    if (fPtrWrite == NULL) {
-        return ERR_FILE;
-    }
-
-    fputs(buf, fPtrWrite);
-
-    free(buf);
-
     return OK;
 }
 
 int load_data_from_file(const char *input_file_path, unsigned char **buf,
                         unsigned int *buf_size) {
-    FILE* fPtrRead = NULL;
-    fPtrRead = fopen(input_file_path, "r");
-    
-    allocate_buffer(buf, *buf_size);
-
-    if (buf == NULL) {
-        return ERR_NULL_PTR;
-    }
-    if (fPtrRead == NULL) {
-        return ERR_FILE;
-    }
-
-    fscanf(fPtrRead, "%s", *buf);
-
+   
     return OK;
 }
 
