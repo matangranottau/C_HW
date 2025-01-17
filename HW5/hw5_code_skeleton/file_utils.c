@@ -10,7 +10,7 @@ int allocate_buffer(void **buf, unsigned int buf_size) {
         return ERR_NULL_PTR;
     }
     
-    *buf = (char*)malloc(MAX_WORD_SIZE * sizeof(char)); // Memory allocation for buffer
+    *buf = (char*)malloc(buf_size * sizeof(char)); // Memory allocation for buffer
 
     if (*buf == NULL) {
         return ERR_MEMORY;
@@ -39,7 +39,21 @@ int write_data_to_file(const char *output_file_path, const unsigned char *buf,
 
 int load_data_from_file(const char *input_file_path, unsigned char **buf,
                         unsigned int *buf_size) {
-  return OK;
+    FILE* fPtrRead = NULL;
+    fPtrRead = fopen(input_file_path, "r");
+    
+    allocate_buffer(buf, *buf_size);
+
+    if (buf == NULL) {
+        return ERR_NULL_PTR;
+    }
+    if (fPtrRead == NULL) {
+        return ERR_FILE;
+    }
+
+    fscanf(fPtrRead, "%s", *buf);
+
+    return OK;
 }
 
 // Function to load blacklisted words from a file
