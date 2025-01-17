@@ -6,7 +6,7 @@
 #define FLAGS_LEN(flags) (sizeof(flags) / sizeof(flag_t))
 #define ENCRYPT_ARG_NUM 4
 #define CENSOR_ARG_NUM 5
-#define PRINT_ERRORS 1
+#define PRINT_ERRORS 0
 
 typedef struct {
   const char *short_name;

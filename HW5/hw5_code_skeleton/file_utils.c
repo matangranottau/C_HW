@@ -1,10 +1,19 @@
 #include "file_utils.h"
 #include "error_types.h"
+#include <stdlib.h>
 
 #define MAX_WORD_SIZE 256
 
 int allocate_buffer(void **buf, unsigned int buf_size) {
-  // TODO
+    if (buf == NULL) {
+        return ERR_NULL_PTR;
+    }
+    
+    *buf = (char*)malloc(MAX_WORD_SIZE * sizeof(char)); // Memory allocation for buffer
+
+    if (*buf == NULL) {
+        return ERR_MEMORY;
+    }
   return OK;
 }
 
