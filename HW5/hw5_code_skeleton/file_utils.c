@@ -11,9 +11,7 @@ int get_file_size(const char* input_file_path) {
     FILE* fPtrRead = NULL;
 
     fPtrRead = fopen(input_file_path, "r");
-    if (fPtrRead == NULL) {
-        return ERR_FILE;
-    }
+    
 
     while (!feof(fPtrRead)) {
         fseek(fPtrRead, sizeof(char), 1); // advance by one char

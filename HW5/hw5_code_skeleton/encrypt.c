@@ -15,7 +15,7 @@ int get_size_out(unsigned int in_buf_size, encrypt_t enc_type) {
 int encrypt_file(const char *input_file_path, const char *output_file_path,
                  encrypt_t enc_type) {
     unsigned char* in_buf, *out_buf;
-    unsigned int in_buf_size = get_file_size(*input_file_path);
+    unsigned int in_buf_size = get_file_size(input_file_path);
     unsigned int out_buf_size = get_size_out(in_buf_size, enc_type);
     
     // TODO: errors
