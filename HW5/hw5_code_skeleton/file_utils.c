@@ -5,9 +5,9 @@
 
 #define MAX_WORD_SIZE 256
 
-int allocate_buffer(void **buf, unsigned int buf_size) {
-  // TODO
-    if (buf == NULL ){
+int allocate_buffer(void** buf, unsigned int buf_size) {
+    // TODO
+    if (buf == NULL) {
         return ERR_NULL_PTR;
     }
     if (buf_size == 0) {
@@ -17,18 +17,19 @@ int allocate_buffer(void **buf, unsigned int buf_size) {
     if (*buf = NULL) {
         return ERR_MEMORY;
     }
-  return OK;
+    return OK;
 }
 
-int write_data_to_file(const char *output_file_path, const unsigned char *buf,
-                       unsigned int buf_size) {
-  // TODO
+int write_data_to_file(const char* output_file_path, const unsigned char* buf,
+    unsigned int buf_size) {
+    // TODO
     if (output_file_path == NULL || buf == NULL) {
         return ERR_NULL_PTR;
     }
     if (buf_size == 0) {
         return ERR_BAD_ENC_TYPE;
     }
+    FILE* file = fopen(output_file_path, "wb"); // open file
     FILE* file = fopen(output_file_path, "w"); // open file
     if (file == NULL) {
         return ERR_FILE;
@@ -38,12 +39,12 @@ int write_data_to_file(const char *output_file_path, const unsigned char *buf,
     if (written != buf_size) {
         return ERR_FILE;
     }
-  return OK;
+    return OK;
 }
 
-int load_data_from_file(const char *input_file_path, unsigned char **buf,
-                        unsigned int *buf_size) {
-  // TODO
+int load_data_from_file(const char* input_file_path, unsigned char** buf,
+    unsigned int* buf_size) {
+    // TODO
     if (input_file_path == NULL || buf == NULL || buf_size == NULL) {
         return ERR_NULL_PTR;
     }
@@ -71,13 +72,13 @@ int load_data_from_file(const char *input_file_path, unsigned char **buf,
         return ERR_FILE;
     }
     *buf_size = (unsigned int)size;
-  return OK;
+    return OK;
 }
 
 // Function to load blacklisted words from a file
-int load_array_of_words(const char *input_file_path, char ***array,
-                        unsigned int *p_cnt) {
-  // TODO
+int load_array_of_words(const char* input_file_path, char*** array,
+    unsigned int* p_cnt) {
+    // TODO
     if (input_file_path == NULL || array == NULL || p_cnt == NULL) {
         return ERR_NULL_PTR;
     }
@@ -85,7 +86,7 @@ int load_array_of_words(const char *input_file_path, char ***array,
     if (file == NULL) {
         return ERR_FILE;
     }
-    char** words = NULL; 
+    char** words = NULL;
     char word[MAX_WORD_SIZE];
     unsigned int cnt = 0;
 
@@ -115,5 +116,5 @@ int load_array_of_words(const char *input_file_path, char ***array,
     fclose(file);
     *array = words;
     p_cnt = cnt;
-  return OK;
+    return OK;
 }
