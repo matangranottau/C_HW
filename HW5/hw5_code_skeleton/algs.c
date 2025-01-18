@@ -4,8 +4,21 @@
 // TODO: Add the function implementations in here.
 
 // None:
+int None(const unsigned char* data_in, unsigned int size_in, unsigned char* data_out, unsigned int size_out){
+	if (data_in == 0 || data_out == 0) {
+		return ERR_NULL_PTR;
+	}
+	if (size_in > size_out) {
+		return ERR_BAD_FUNC_ARG;
+	}
+	for (unsigned int i = 0; i < size_in; i++) { //basicly doing nothing
+		data_out[i] = data_in[i];
+	}
+	return OK;
+}
 
 // Flip Even:
+
 
 // Swap 3:
 
