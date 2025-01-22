@@ -63,17 +63,36 @@ int Rotate_and_center_5(const unsigned char* data_in, unsigned int size_in, unsi
 	if (data_in == NULL || data_out == NULL) {
 		return ERR_NULL_PTR;
 	}
-	if (size_in > size_out) {
+	if (size_in * 2 > size_out) {
 		return ERR_BAD_FUNC_ARG;
 	}
 	for (unsigned int i = 0; i < size_in; i++) {
-		unsigned char rotated = (data_in[i] >> 5) | (data_in[i] << 3); // rotating by shifting the bytes
-		data_out[i] = rotated ^ 0b10101010; 
+		unsigned char rotated = (data_in[i] << 5) | (data_in[i] >> 3); // rotating by shifting the bytes
+		data_out[i * 2] = (rotated >> 3) & 0x1F;        // Upper 5 bits with zeros
+		data_out[i * 2] |= 0x00;                       
+		data_out[i * 2 + 1] = (rotated & 0x07) << 5;   // Lower 3 bits with zeros
 	}
 
 	return OK;
 }
 
-int Inv_Rotate_and_center_5(const unsigned char* data_in, unsigned int size_in, unsigned char* data_out, unsigned int size_out){}
+int Inv_Rotate_and_center_5(const unsigned char* data_in, unsigned int size_in, unsigned char* data_out, unsigned int size_out){
+	if (data_in == NULL || data_out == NULL) {
+		return ERR_NULL_PTR;
+	}
+	if (size_in / 2 > size_out || size_in % 2 != 0) {
+		return ERR_BAD_FUNC_ARG;
+
+	 for (unsigned int i = 0; i < size_in / 2; i++) {
+        unsigned char upper = data_in[i * 2] & 0x1F;        // Extract upper 5 bits
+        unsigned char lower = (data_in[i * 2 + 1] >> 5);    // Extract lower 3 bits
+
+        unsigned char rotated = (upper << 3) | lower;       // connecting to 1 
+        data_out[i] = (rotated >> 5) | (rotated << 3);      // Reverse the rotation
+    }
+
+    return OK;
+}
+
 
 
