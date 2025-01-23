@@ -6,6 +6,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+void put_astrik(char* str, const int idx1 , const int idx2) {
+    for (int i = idx1; i <= idx2; i++) {
+        str[i] = '*';
+    }
+}
+
 int is_special(const char* str, const int idx) {
     const char* special_chars = "\\\n\r\t ‘!()[]{}<>,.:;\"-_=+/?";
     
@@ -21,6 +27,7 @@ int is_special(const char* str, const int idx) {
     
     return 0;
 }
+
 void add_suffix(const char* output_censored_path, char** ptr_output_encrypted_path) {
     char* new_suffix = "_enc.txt";
     int old_suffix_len = 4, new_suffix_len = 8;
@@ -51,21 +58,30 @@ void censor(char** buff, const char** blacklist_array, const int buf_size, const
             for (int j = 0; j < str_len - n; j++) {
 
                 if (j == 0 && is_special(str, j + n + 1)) {
-                    if (check_eq(str, 0, j + n, blacklist_array[i])) { // TODO: check_eq()
-                        put_astrik(str, 0, j + n); // TODO: put_astrik()
+                    if (strncmp(str[0], blacklist_array[i], n)) {
+                        put_astrik(str, 0, j + n); 
+                        j += n - 1;
                     }
-                    else if (is_special(str, j) && is_special(str, j + n + 1)) {
-
-                    }
-
                 }
+                else if (is_special(str, j) && is_special(str, j + n + 1)) {
+
+                    if (strncmp(str[j+1], blacklist_array[i], n)) {
+                        put_astrik(str, j + 1, j + n);
+                        j += n;
+                    }
+                }
+
             }
         }
-        
     }
 
-    // free old buff information.
+    char* uncensored_buff = *buff;
+    *buff = str;
+    free(uncensored_buff);
+        
 }
+
+    // free old buff information
 
 void censor_file(const char* input_path, const char* blacklist_path, const char* output_censored_path) {
     char** blacklist_array;
