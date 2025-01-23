@@ -43,7 +43,6 @@ void add_suffix(const char* output_censored_path, char** ptr_output_encrypted_pa
 }
 
 void censor(char** buff, const char** blacklist_array, const int buf_size, const int blacklist_size) {
-    // TODO: input buffer gets censored with blacklist.
 
     char* str = (char*)malloc(buf_size + 1);
     strcpy(str, *buff);
@@ -81,7 +80,6 @@ void censor(char** buff, const char** blacklist_array, const int buf_size, const
         
 }
 
-    // free old buff information
 
 void censor_file(const char* input_path, const char* blacklist_path, const char* output_censored_path) {
     char** blacklist_array;
