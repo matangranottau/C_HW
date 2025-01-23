@@ -4,7 +4,7 @@
 #include "file_utils.h"
 #include <stdlib.h>
 
-void add_suffix(const char* input_path, const char* output_censored_path, char** output_encrypted_path) {
+void add_suffix(const char* output_censored_path, char** ptr_output_encrypted_path) {
     // TODO: replaces ".txt" suffix to "_enc.txt"
 }
 
@@ -30,7 +30,7 @@ void censor_file(const char* input_path, const char* blacklist_path, const char*
 int censor_and_encrypt(const char *input_path, const char *output_censored_path,
                        encrypt_t enc_type, const char *blacklist_path) {
     char* output_encrypted_path;
-    add_suffix(input_path, output_censored_path, &output_encrypted_path);
+    add_suffix(output_censored_path, &output_encrypted_path);
     
     encrypt_file(input_path, output_encrypted_path, enc_type);
     
