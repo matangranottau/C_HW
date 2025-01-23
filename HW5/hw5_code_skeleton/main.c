@@ -4,6 +4,7 @@
 #include "encrypt.h"
 #include "censor.h"
 #include <stdio.h>
+#include "algs.h"
 
 static int process_operation(command_t cmd) {
 	switch (cmd.op)
@@ -24,7 +25,7 @@ static int process_operation(command_t cmd) {
   return OK;
 }
 
-int main(int argc, const char *argv[]) {
+/*int main(int argc, const char* argv[]) {
 	if (argc <= 1) {
 		print_help();
   }
@@ -38,4 +39,13 @@ int main(int argc, const char *argv[]) {
 	}
 
   return 0;
+}
+*/
+int main(int argc, const char* argv[]) {
+	char* str_in = "hello";
+	char* str_out;
+	None(str_in, 6, str_out, 6);
+	printf("%s", str_out);
+
+	return 0;
 }
