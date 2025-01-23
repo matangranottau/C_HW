@@ -5,12 +5,9 @@
 #include "censor.h"
 #include <stdio.h>
 #include "algs.h"
-#define ADD_SUFFIX_TEST 0
-
-
-#if ADD_SUFFIX_TEST
-#include "censor.h"
-#endif // ADD_SUFFIX_TEST
+#define MAIN_ON 0
+#define TEST_ADD_SUFFIX 0
+#define TEST_CENSOR 1
 
 
 static int process_operation(command_t cmd) {
@@ -32,10 +29,11 @@ static int process_operation(command_t cmd) {
   return OK;
 }
 
+#if MAIN_ON
 int main(int argc, const char* argv[]) {
 	if (argc <= 1) {
 		print_help();
-  }
+	}
 	else {
 		command_t cmd;
 		cmd.input_path = "";
@@ -45,11 +43,29 @@ int main(int argc, const char* argv[]) {
 		process_operation(cmd);
 	}
 
-  return 0;
+	return 0;
 }
+#endif // MAIN_ON
 
-#if ADD_SUFFIX_TEST
-main(int argc, const char* argv[]) {
+
+#if TEST_CENSOR
+int main(int argc, const char* argv[]) {
+	char* buff_1 = "Hello, im matan";
+	char* cen_1[2] = { "Hello", "im" };
+	censor(&buff_1, cen_1, 15, 2);
+	printf("%s\n", buff_1);
+
+	char buff_2[12] = {'h', 'e', 'l', 'l', 'o', 'i', 'm', 'm', 'a', 't', 'a', 'n'};
+	char* cen_2[2] = { "Hello", "im" };
+	censor(&buff_2, cen_2, 12, 2);
+	printf("%s\n", buff_2);
+	return 0;
+}
+#endif // TEST_CENSOR
+
+
+#if TEST_ADD_SUFFIX
+int main(int argc, const char* argv[]) {
 	char* out;
 	char* in_1 = "text.txt";
 	char* in_2 = "blahblahblahh\out.txt";
@@ -61,4 +77,4 @@ main(int argc, const char* argv[]) {
 
 	return 0;
 }
-#endif // ADD_SUFFIX_TEST
+#endif // TEST_ADD_SUFFIX

@@ -45,7 +45,7 @@ void add_suffix(const char* output_censored_path, char** ptr_output_encrypted_pa
 void censor(char** buff, const char** blacklist_array, const int buf_size, const int blacklist_size) {
 
     char* str = (char*)malloc(buf_size + 1);
-    strcpy(str, *buff);
+    memcpy(str, *buff, buf_size);
     str[buf_size] = '\0';
     int str_len = strlen(str);
 
@@ -57,14 +57,14 @@ void censor(char** buff, const char** blacklist_array, const int buf_size, const
             for (int j = 0; j < str_len - n; j++) {
 
                 if (j == 0 && is_special(str, j + n + 1)) {
-                    if (strncmp(str[0], blacklist_array[i], n)) {
-                        put_astrik(str, 0, j + n); 
+                    if (strncmp(str, blacklist_array[i], n) == 0) {
+                        put_astrik(str, 0, j + n - 1); 
                         j += n - 1;
                     }
                 }
                 else if (is_special(str, j) && is_special(str, j + n + 1)) {
 
-                    if (strncmp(str[j+1], blacklist_array[i], n)) {
+                    if (strncmp(str + j + 1, blacklist_array[i], n) == 0) {
                         put_astrik(str, j + 1, j + n);
                         j += n;
                     }
@@ -76,7 +76,7 @@ void censor(char** buff, const char** blacklist_array, const int buf_size, const
 
     char* uncensored_buff = *buff;
     *buff = str;
-    free(uncensored_buff);
+    //free(uncensored_buff);
         
 }
 
