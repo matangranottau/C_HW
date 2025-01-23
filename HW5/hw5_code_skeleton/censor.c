@@ -3,9 +3,21 @@
 #include "encrypt.h"
 #include "file_utils.h"
 #include <stdlib.h>
+#include <string.h>
 
 void add_suffix(const char* output_censored_path, char** ptr_output_encrypted_path) {
     // TODO: replaces ".txt" suffix to "_enc.txt"
+    char* new_suffix = "_enc.txt";
+    int old_suffix_len = 4, new_suffix_len = 8;
+    int old_len = strlen(output_censored_path), new_len = old_len + (new_suffix_len - old_suffix_len);
+
+    char* str = (char*)malloc(new_len + 1); // + 1 for null terminator
+    
+    strncpy(str, output_censored_path, old_len - old_suffix_len); // copy all char until .txt from censored
+    strcat(str, new_suffix);
+    str[new_len] = "\0";
+    *ptr_output_encrypted_path = str;
+
 }
 
 void censor(char** buff, const char** blacklist_array, const int buf_size) {
@@ -24,6 +36,8 @@ void censor_file(const char* input_path, const char* blacklist_path, const char*
     censor(&buf, blacklist_array, buf_size);
 
     write_data_to_file(output_censored_path, buf, buf_size);
+
+    // TODO: Free output_censored_path from memory (The string itself) (was allocated in add_suffix)
 
 }
 
