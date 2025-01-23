@@ -29,7 +29,6 @@ void censor_file(const char* input_path, const char* blacklist_path, const char*
 
 int censor_and_encrypt(const char *input_path, const char *output_censored_path,
                        encrypt_t enc_type, const char *blacklist_path) {
-  // TODO
     char* output_encrypted_path;
     add_suffix(input_path, output_censored_path, &output_encrypted_path);
     

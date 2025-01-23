@@ -82,7 +82,7 @@ int Inv_Rotate_and_center_5(const unsigned char* data_in, unsigned int size_in, 
 	}
 	if (size_in / 2 > size_out || size_in % 2 != 0) {
 		return ERR_BAD_FUNC_ARG;
-
+	}
 	 for (unsigned int i = 0; i < size_in / 2; i++) {
         unsigned char upper = data_in[i * 2] & 0x1F;        // Extract upper 5 bits
         unsigned char lower = (data_in[i * 2 + 1] >> 5);    // Extract lower 3 bits
