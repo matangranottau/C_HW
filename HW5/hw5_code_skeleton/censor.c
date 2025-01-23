@@ -46,6 +46,9 @@ void censor(char** buff, const char** blacklist_array, const int buf_size, const
 
     char* str = (char*)malloc(buf_size + 1);
     memcpy(str, *buff, buf_size);
+    for (int k = 0; k < buf_size; k++) {
+        str[k] = (*buff)[k];
+    }
     str[buf_size] = '\0';
     int str_len = strlen(str);
 
