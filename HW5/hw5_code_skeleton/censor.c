@@ -6,8 +6,22 @@
 #include <stdlib.h>
 #include <string.h>
 
+int is_special(const char* str, const int idx) {
+    const char* special_chars = "\\\n\r\t ‘!()[]{}<>,.:;\"-_=+/?";
+    
+    if (str[idx] == '\0') { // in case we reach end of str
+        return 1;
+    }
+    
+    for (int i = 0; special_chars[i] != '\0'; i++) {
+        if (special_chars[i] == str[idx]) {
+            return 1;
+        }
+    }
+    
+    return 0;
+}
 void add_suffix(const char* output_censored_path, char** ptr_output_encrypted_path) {
-    // TODO: replaces ".txt" suffix to "_enc.txt"
     char* new_suffix = "_enc.txt";
     int old_suffix_len = 4, new_suffix_len = 8;
     int old_len = strlen(output_censored_path), new_len = old_len + (new_suffix_len - old_suffix_len);
@@ -21,8 +35,36 @@ void add_suffix(const char* output_censored_path, char** ptr_output_encrypted_pa
     
 }
 
-void censor(char** buff, const char** blacklist_array, const int buf_size) {
+void censor(char** buff, const char** blacklist_array, const int buf_size, const int blacklist_size) {
     // TODO: input buffer gets censored with blacklist.
+
+    char* str = (char*)malloc(buf_size + 1);
+    strcpy(str, *buff);
+    str[buf_size] = '\0';
+    int str_len = strlen(str);
+
+    for (int i = 0; i < blacklist_size; i++) {
+        
+        int n = strlen(blacklist_array[i]);
+        
+        if (str_len > n) { // if blacklist word longer than str, no censor will occur
+            for (int j = 0; j < str_len - n; j++) {
+
+                if (j == 0 && is_special(str, j + n + 1)) {
+                    if (check_eq(str, 0, j + n, blacklist_array[i])) { // TODO: check_eq()
+                        put_astrik(str, 0, j + n); // TODO: put_astrik()
+                    }
+                    else if (is_special(str, j) && is_special(str, j + n + 1)) {
+
+                    }
+
+                }
+            }
+        }
+        
+    }
+
+    // free old buff information.
 }
 
 void censor_file(const char* input_path, const char* blacklist_path, const char* output_censored_path) {
@@ -34,12 +76,11 @@ void censor_file(const char* input_path, const char* blacklist_path, const char*
 
     load_data_from_file(input_path, &buf, &buf_size);
 
-    censor(&buf, blacklist_array, buf_size);
+    censor(&buf, blacklist_array, buf_size, cnt);
 
     write_data_to_file(output_censored_path, buf, buf_size);
 
-    // TODO: Free output_censored_path from memory (The string itself) (was allocated in add_suffix)
-
+    
 }
 
 int censor_and_encrypt(const char *input_path, const char *output_censored_path,
@@ -48,6 +89,8 @@ int censor_and_encrypt(const char *input_path, const char *output_censored_path,
     add_suffix(output_censored_path, &output_encrypted_path);
     
     encrypt_file(input_path, output_encrypted_path, enc_type);
+    
+    free(output_encrypted_path);
     
     censor_file(input_path, blacklist_path, output_censored_path);
 

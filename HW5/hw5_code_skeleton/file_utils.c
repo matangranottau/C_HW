@@ -38,7 +38,7 @@ int allocate_buffer(void **buf, unsigned int buf_size) {
 
 int write_data_to_file(const char* output_file_path, const unsigned char* buf,
     unsigned int buf_size) {
-    // TODO
+   
     if (output_file_path == NULL || buf == NULL) {
         return ERR_NULL_PTR;
     }
@@ -59,7 +59,7 @@ int write_data_to_file(const char* output_file_path, const unsigned char* buf,
 
 int load_data_from_file(const char* input_file_path, unsigned char** buf,
     unsigned int* buf_size) {
-    // TODO
+
     if (input_file_path == NULL || buf == NULL || buf_size == NULL) {
         return ERR_NULL_PTR;
     }
