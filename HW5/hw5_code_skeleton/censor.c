@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "censor.h"
 #include "error_types.h"
 #include "encrypt.h"
@@ -14,10 +15,10 @@ void add_suffix(const char* output_censored_path, char** ptr_output_encrypted_pa
     char* str = (char*)malloc(new_len + 1); // + 1 for null terminator
     
     strncpy(str, output_censored_path, old_len - old_suffix_len); // copy all char until .txt from censored
+    str[old_len - old_suffix_len] = '\0'; // strncpy doesn't null terminates for some reason
     strcat(str, new_suffix);
-    str[new_len] = "\0";
     *ptr_output_encrypted_path = str;
-
+    
 }
 
 void censor(char** buff, const char** blacklist_array, const int buf_size) {

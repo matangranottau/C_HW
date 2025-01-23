@@ -5,6 +5,13 @@
 #include "censor.h"
 #include <stdio.h>
 #include "algs.h"
+#define ADD_SUFFIX_TEST 0
+
+
+#if ADD_SUFFIX_TEST
+#include "censor.h"
+#endif // ADD_SUFFIX_TEST
+
 
 static int process_operation(command_t cmd) {
 	switch (cmd.op)
@@ -41,11 +48,17 @@ int main(int argc, const char* argv[]) {
   return 0;
 }
 
-/*int main(int argc, const char* argv[]) {
-	char* str_in = "IT - This is my sentence.i like to moove it moove it and if you can't move it i don't know! OK this sitting is unaccatple if i like to moove it!can you moove - it ? not a single MOoVE. or re - moOvE ok ? am i(moove) or mooveing ? Done!it", str_out[481];
-	Flip_Even(str_in, 481, str_out, 481);
-	printf("%s", str_out);
+#if ADD_SUFFIX_TEST
+main(int argc, const char* argv[]) {
+	char* out;
+	char* in_1 = "text.txt";
+	char* in_2 = "blahblahblahh\out.txt";
+	add_suffix(in_1, &out);
+	printf("%s\n", out);
+
+	add_suffix(in_2, &out);
+	printf("%s\n", out);
 
 	return 0;
-}*/
- 
+}
+#endif // ADD_SUFFIX_TEST
