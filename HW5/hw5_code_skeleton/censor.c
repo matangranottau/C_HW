@@ -15,7 +15,7 @@ void censor(char** buff, const char** blacklist_array, const int buf_size) {
 void censor_file(const char* input_path, const char* blacklist_path, const char* output_censored_path) {
     char** blacklist_array;
     char* buf;
-    unsigned int cnt, buf_size;
+    unsigned int cnt, buf_size = get_file_size(input_path);
 
     load_array_of_words(blacklist_path, &blacklist_array, &cnt);
 

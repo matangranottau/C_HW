@@ -77,7 +77,7 @@ int load_data_from_file(const char* input_file_path, unsigned char** buf,
         return ERR_FILE;
     }
     *buf = malloc(buf_size);
-    if (*buf = NULL) {
+    if (*buf == NULL) {
         return ERR_MEMORY;
     }
     size_t read = fread(*buf, 1, size, file); // reading
