@@ -25,7 +25,7 @@ static int process_operation(command_t cmd) {
   return OK;
 }
 
-/*int main(int argc, const char* argv[]) {
+int main(int argc, const char* argv[]) {
 	if (argc <= 1) {
 		print_help();
   }
@@ -40,12 +40,12 @@ static int process_operation(command_t cmd) {
 
   return 0;
 }
-*/
-int main(int argc, const char* argv[]) {
-	char* str_in = "hello";
-	char* str_out;
-	None(str_in, 6, str_out, 6);
+
+/*int main(int argc, const char* argv[]) {
+	char* str_in = "IT - This is my sentence.i like to moove it moove it and if you can't move it i don't know! OK this sitting is unaccatple if i like to moove it!can you moove - it ? not a single MOoVE. or re - moOvE ok ? am i(moove) or mooveing ? Done!it", str_out[481];
+	Flip_Even(str_in, 481, str_out, 481);
 	printf("%s", str_out);
 
 	return 0;
-}
+}*/
+ 

@@ -13,8 +13,7 @@ int get_file_size(const char* input_file_path) {
     fPtrRead = fopen(input_file_path, "r");
     
 
-    while (!feof(fPtrRead)) {
-        fseek(fPtrRead, sizeof(char), 1); // advance by one char
+    while (fgetc(fPtrRead) != EOF) {
         size++;
     }
     fclose(fPtrRead);

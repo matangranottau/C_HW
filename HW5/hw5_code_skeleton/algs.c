@@ -27,12 +27,14 @@ int Flip_Even(const unsigned char* data_in, unsigned int size_in, unsigned char*
 		return ERR_BAD_FUNC_ARG;
 	}
 	for (unsigned int i = 0; i < size_in; i++) {
-		if (i % 2 == 0) {
+		data_out[i] = data_in[i] ^ 0b10101010;
+		
+		/*if (i % 2 == 0) {
 			data_out[i] = ~data_in[i]; // ~ is bitwise not 
 		}
 		else {
 			data_out[i] = data_in[i];
-		}
+		}*/
 	}
 	return OK;
 }
