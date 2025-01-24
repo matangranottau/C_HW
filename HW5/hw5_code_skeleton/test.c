@@ -4,7 +4,7 @@
 
 
 
-// int Flip_Even(const unsigned char* data_in, unsigned int size_in, unsigned char* data_out, unsigned int size_out);
+
 
 int test_flip_even(char test_case, char expected) {
 	char buf[1] = { test_case };
