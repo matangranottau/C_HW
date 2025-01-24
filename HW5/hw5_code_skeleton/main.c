@@ -12,6 +12,12 @@
 
 
 static int process_operation(command_t cmd) {
+	if (cmd.input_path == NULL) {
+		return 1;
+	}
+	if (cmd.output_path == NULL) {
+		return 1;
+	}
 	switch (cmd.op)
 	{
 	case OP_ENC:

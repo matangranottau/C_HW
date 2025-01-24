@@ -15,8 +15,8 @@ int get_size_out(unsigned int in_buf_size, encrypt_t enc_type) {
 int encrypt_file(const char *input_file_path, const char *output_file_path,
                  encrypt_t enc_type) {
     unsigned char* in_buf , *out_buf ;
-    unsigned int in_buf_size = get_file_size(input_file_path);
-    unsigned int out_buf_size = get_size_out(in_buf_size, enc_type);
+    unsigned int in_buf_size;// = get_file_size(input_file_path);
+    unsigned int out_buf_size;// = get_size_out(in_buf_size, enc_type);
     
     // TODO: errors
     if (input_file_path == NULL || output_file_path == NULL) {
@@ -27,10 +27,9 @@ int encrypt_file(const char *input_file_path, const char *output_file_path,
         return ERR_BAD_FUNC_ARG;
     }
     
-    allocate_buffer(&in_buf, in_buf_size);
-
     // load from file data to buffer
     load_data_from_file(input_file_path, &in_buf, &in_buf_size);
+    out_buf_size = get_size_out(in_buf_size, enc_type);
     allocate_buffer(&out_buf, out_buf_size);
     
     // encrypt by enc_type
