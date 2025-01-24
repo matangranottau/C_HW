@@ -5,7 +5,11 @@
 #include "file_utils.h"
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
+void make_it_lower(char* str) {
+
+}
 void put_astrik(char* str, const int idx1 , const int idx2) {
     for (int i = idx1; i <= idx2; i++) {
         str[i] = '*';
@@ -86,7 +90,7 @@ void censor(char** buff, const char** blacklist_array, const int buf_size, const
 void censor_file(const char* input_path, const char* blacklist_path, const char* output_censored_path) {
     char** blacklist_array;
     char* buf;
-    unsigned int cnt, buf_size = get_file_size(input_path);
+    unsigned int cnt, buf_size;
 
     load_array_of_words(blacklist_path, &blacklist_array, &cnt);
 

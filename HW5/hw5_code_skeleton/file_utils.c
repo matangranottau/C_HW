@@ -6,20 +6,6 @@
 
 #define MAX_WORD_SIZE 256
 
-int get_file_size(const char* input_file_path) {
-    int size = 0;
-    FILE* fPtrRead = NULL;
-
-    fPtrRead = fopen(input_file_path, "r");
-    
-
-    while (fgetc(fPtrRead) != EOF) {
-        size++;
-    }
-    fclose(fPtrRead);
-
-    return size;
-}
 
 int allocate_buffer(void **buf, unsigned int buf_size) {
  
@@ -67,15 +53,15 @@ int load_data_from_file(const char* input_file_path, unsigned char** buf,
     if (input_file_path == NULL || buf == NULL || buf_size == NULL) {
         return ERR_NULL_PTR;
     }
-    FILE* file = fopen(input_file_path, "r"); // open file
+    FILE* file = fopen(input_file_path, "rb"); // open file
     if (file == NULL) {
         return ERR_FILE;
     }
 
-
+    fflush(file);
     fseek(file, 0, SEEK_END);
     long size = ftell(file); //checking the size of the file
-    fseek(file, 0, SEEK_SET);
+    rewind(file);
     
 
     if (size < 0) {
@@ -90,15 +76,11 @@ int load_data_from_file(const char* input_file_path, unsigned char** buf,
         printf("*buf is null!\n");
         return 1;
     }
-    /*buf = (char*)malloc(buf_size);
-    if (*buf == NULL) {
-        return ERR_MEMORY;
-    }
-    */
+    
     size_t read = fread(*buf, 1, size, file); // reading
     fclose(file);
 
-    if (read != size) { // error in reading thr file
+    if (read > size) { // error in reading the file
         free(*buf);
         return ERR_FILE;
     }
@@ -146,6 +128,6 @@ int load_array_of_words(const char* input_file_path, char*** array,
     }
     fclose(file);
     *array = words;
-    p_cnt = cnt;
+    *p_cnt = cnt;
     return OK;
 }

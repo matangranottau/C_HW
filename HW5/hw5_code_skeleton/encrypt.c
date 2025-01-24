@@ -15,8 +15,8 @@ int get_size_out(unsigned int in_buf_size, encrypt_t enc_type) {
 int encrypt_file(const char *input_file_path, const char *output_file_path,
                  encrypt_t enc_type) {
     unsigned char* in_buf , *out_buf ;
-    unsigned int in_buf_size;// = get_file_size(input_file_path);
-    unsigned int out_buf_size;// = get_size_out(in_buf_size, enc_type);
+    unsigned int in_buf_size;
+    unsigned int out_buf_size;
     
     // TODO: errors
     if (input_file_path == NULL || output_file_path == NULL) {
@@ -55,6 +55,7 @@ int encrypt_file(const char *input_file_path, const char *output_file_path,
     // free in_buf, write to output file.
     free(in_buf);
     write_data_to_file(output_file_path, out_buf, out_buf_size);
+    free(out_buf);
     return OK;
 }
 
@@ -66,8 +67,8 @@ int decrypt_file(const char *input_file_path, const char *output_file_path,
   }
     else if (enc_type == ENC_TYPE_ROT_AND_CENTER_5) {
         unsigned char* in_buf, *out_buf;
-        unsigned int in_buf_size = get_file_size(*input_file_path);
-        unsigned int out_buf_size = in_buf_size / 2 ;
+        unsigned int in_buf_size;
+        unsigned int out_buf_size;
         if (input_file_path == NULL || output_file_path == NULL) {
             return ERR_NULL_PTR;
         }
@@ -78,6 +79,7 @@ int decrypt_file(const char *input_file_path, const char *output_file_path,
 
         // load from file data to buffer, create new buffer.
         load_data_from_file(input_file_path, &in_buf, &in_buf_size);
+        out_buf_size = in_buf_size / 2;
         allocate_buffer(&out_buf, out_buf_size);
 
         // decrypt.
@@ -86,6 +88,7 @@ int decrypt_file(const char *input_file_path, const char *output_file_path,
         // free in_buf, write to output file.
         free(in_buf);
         write_data_to_file(output_file_path, out_buf, out_buf_size);
+        free(out_buf);
         return OK;
     }
   return OK;
