@@ -22,7 +22,7 @@ int get_file_size(const char* input_file_path) {
 }
 
 int allocate_buffer(void **buf, unsigned int buf_size) {
-  // TODO
+ 
     if (buf == NULL ){
         return ERR_NULL_PTR;
     }
@@ -75,10 +75,11 @@ int load_data_from_file(const char* input_file_path, unsigned char** buf,
         fclose(file);
         return ERR_FILE;
     }
-    *buf = malloc(buf_size);
+    /*buf = (char*)malloc(buf_size);
     if (*buf == NULL) {
         return ERR_MEMORY;
     }
+    */
     size_t read = fread(*buf, 1, size, file); // reading
     fclose(file);
 
