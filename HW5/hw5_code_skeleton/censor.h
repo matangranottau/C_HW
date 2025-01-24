@@ -3,6 +3,8 @@
 
 #include "algs.h" // for encrypt_t
 
+void censor_string(char** p_str, const char* cen_word, const int str_len, const int cen_word_len);
+
 void censor(char** buff, const char** blacklist_array, const int buf_size, const int blacklist_size);
 // censor buff
 

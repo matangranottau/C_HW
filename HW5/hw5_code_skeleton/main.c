@@ -4,10 +4,11 @@
 #include "encrypt.h"
 #include "censor.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include "algs.h"
-#define MAIN_ON 0
+#define MAIN_ON 1
 #define TEST_ADD_SUFFIX 0
-#define TEST_CENSOR 1
+#define TEST_CENSOR 0
 
 
 static int process_operation(command_t cmd) {
@@ -52,13 +53,25 @@ int main(int argc, const char* argv[]) {
 int main(int argc, const char* argv[]) {
 	char* buff_1 = "Hello, im matan";
 	char* cen_1[2] = { "Hello", "im" };
-	censor(&buff_1, cen_1, 15, 2);
-	printf("%s\n", buff_1);
+	//censor(&buff_1, cen_1, 15, 2);
+	//printf("%s\n", buff_1);
 
 	char buff_2[12] = {'h', 'e', 'l', 'l', 'o', 'i', 'm', 'm', 'a', 't', 'a', 'n'};
 	char* cen_2[2] = { "Hello", "im" };
-	censor(&buff_2, cen_2, 12, 2);
-	printf("%s\n", buff_2);
+	//censor(&buff_2, cen_2, 12, 2);
+	//printf("%s\n", buff_2);
+	
+
+	char* hds_str = "can you save?\n, can you save my..?\n can you save my .. HEAVYDIRTYSOUL??";
+	printf("strlen of str1 + 1 is %d\n", strlen(hds_str) + 1);
+	char* str_2 = (char*)malloc(strlen(hds_str) + 1);
+	if (str_2 == NULL) {
+		printf("error\n");
+		return 1;
+	}
+	strcpy(str_2, hds_str);
+	censor_string(&str_2, "save", strlen(str_2), strlen("save"));
+	printf("%s\n", str_2);
 	return 0;
 }
 #endif // TEST_CENSOR

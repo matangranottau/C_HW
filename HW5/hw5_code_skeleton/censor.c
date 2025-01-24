@@ -42,45 +42,44 @@ void add_suffix(const char* output_censored_path, char** ptr_output_encrypted_pa
     
 }
 
+void censor_string(char** p_str, const char* cen_word, const int str_len, const int cen_word_len) {
+
+    if (str_len > cen_word_len) { // if blacklist word longer than str, no censor will occur
+        for (int j = 0; j < str_len - cen_word_len; j++) {
+
+            if (j == 0 && is_special(*p_str, j + cen_word_len + 1)) {
+                if (strncmp(*p_str, cen_word, cen_word_len) == 0) {
+                    put_astrik(*p_str, 0, j + cen_word_len - 1);
+                    j += cen_word_len - 1;
+                }
+            }
+            else if (is_special(*p_str, j) && is_special(*p_str, j + cen_word_len + 1)) {
+
+                if (strncmp(*p_str + j + 1, cen_word, cen_word_len) == 0) {
+                    put_astrik(*p_str, j + 1, j + cen_word_len);
+                    j += cen_word_len;
+                }
+            }
+
+        }
+    }
+}
+
 void censor(char** buff, const char** blacklist_array, const int buf_size, const int blacklist_size) {
 
     char* str = (char*)malloc(buf_size + 1);
-    memcpy(str, *buff, buf_size);
-    for (int k = 0; k < buf_size; k++) {
-        str[k] = (*buff)[k];
+    if (str == NULL) {
+        printf("str bad\n");
     }
+    memcpy(str, *buff, buf_size);
     str[buf_size] = '\0';
-    int str_len = strlen(str);
 
     for (int i = 0; i < blacklist_size; i++) {
-        
-        int n = strlen(blacklist_array[i]);
-        
-        if (str_len > n) { // if blacklist word longer than str, no censor will occur
-            for (int j = 0; j < str_len - n; j++) {
-
-                if (j == 0 && is_special(str, j + n + 1)) {
-                    if (strncmp(str, blacklist_array[i], n) == 0) {
-                        put_astrik(str, 0, j + n - 1); 
-                        j += n - 1;
-                    }
-                }
-                else if (is_special(str, j) && is_special(str, j + n + 1)) {
-
-                    if (strncmp(str + j + 1, blacklist_array[i], n) == 0) {
-                        put_astrik(str, j + 1, j + n);
-                        j += n;
-                    }
-                }
-
-            }
-        }
+        censor_string(&str, blacklist_array[i], strlen(str), strlen(blacklist_array[i]));
     }
 
-    char* uncensored_buff = *buff;
-    *buff = str;
-    //free(uncensored_buff);
-        
+    free(*buff);
+    *buff = str;        
 }
 
 
