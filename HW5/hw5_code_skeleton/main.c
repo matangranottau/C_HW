@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "algs.h"
-#define MAIN_ON 1
+#define MAIN_ON 0
 #define TEST_ADD_SUFFIX 0
 #define TEST_CENSOR 0
 

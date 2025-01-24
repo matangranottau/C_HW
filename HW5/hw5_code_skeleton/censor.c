@@ -7,8 +7,13 @@
 #include <string.h>
 #include <ctype.h>
 
-void make_it_lower(char* str) {
-
+int is_eq(const char* str1, const char* str2, const int n) {
+    for (int i = 0; i < n; i++) {
+        if (tolower(str1[i]) != tolower(str2[i])) {
+            return 0;
+        }
+    }
+    return 1;
 }
 void put_astrik(char* str, const int idx1 , const int idx2) {
     for (int i = idx1; i <= idx2; i++) {
@@ -52,14 +57,14 @@ void censor_string(char** p_str, const char* cen_word, const int str_len, const 
         for (int j = 0; j < str_len - cen_word_len; j++) {
 
             if (j == 0 && is_special(*p_str, j + cen_word_len + 1)) {
-                if (strncmp(*p_str, cen_word, cen_word_len) == 0) {
+                if (is_eq(*p_str, cen_word, cen_word_len)) {
                     put_astrik(*p_str, 0, j + cen_word_len - 1);
                     j += cen_word_len - 1;
                 }
             }
             else if (is_special(*p_str, j) && is_special(*p_str, j + cen_word_len + 1)) {
 
-                if (strncmp(*p_str + j + 1, cen_word, cen_word_len) == 0) {
+                if (is_eq(*p_str + j + 1, cen_word, cen_word_len)) {
                     put_astrik(*p_str, j + 1, j + cen_word_len);
                     j += cen_word_len;
                 }
