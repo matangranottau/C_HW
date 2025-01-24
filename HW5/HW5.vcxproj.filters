@@ -33,6 +33,9 @@
     <ClCompile Include="hw5_code_skeleton\parser.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hw5_code_skeleton\test.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hw5_code_skeleton\algs.h">
@@ -51,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hw5_code_skeleton\parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hw5_code_skeleton\test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
