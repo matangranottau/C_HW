@@ -10,19 +10,15 @@
 int allocate_buffer(void **buf, unsigned int buf_size) {
  
     if (buf == NULL){
-        printf("buf is NULL\n");
         return ERR_NULL_PTR;
     }
     if (buf_size == 0) {
-        printf("buf_size is 0\n");
         return ERR_BAD_FUNC_ARG;
     }
     *buf = malloc(buf_size);
     if (*buf == NULL) {
-        printf("couldn't allocate buffer\n");
         return ERR_MEMORY;
     }
-    printf("allocated buffer of size %d\n", buf_size);
     return OK;
 }
 
