@@ -53,7 +53,7 @@ int load_data_from_file(const char* input_file_path, unsigned char** buf,
     if (input_file_path == NULL || buf == NULL || buf_size == NULL) {
         return ERR_NULL_PTR;
     }
-    FILE* file = fopen(input_file_path, "rb"); // open file
+    FILE* file = fopen(input_file_path, "r"); // open file
     if (file == NULL) {
         return ERR_FILE;
     }
@@ -103,7 +103,12 @@ int load_array_of_words(const char* input_file_path, char*** array,
     char word[MAX_WORD_SIZE];
     unsigned int cnt = 0;
 
-    while (fscanf(file, "% 255s", word) == 1) {
+    while (fgets(word, MAX_WORD_SIZE, file) != NULL) {
+        // Remove newline character, if present
+        size_t len = strlen(word);
+        if (len > 0 && word[len - 1] == '\n') {
+            word[len - 1] = '\0';
+        }
         char** temp = realloc(words, (cnt + 1) * sizeof(char*));
         if (temp == NULL) {
             fclose(file);
@@ -114,6 +119,7 @@ int load_array_of_words(const char* input_file_path, char*** array,
             return ERR_MEMORY;
         }
         words = temp;
+
         words[cnt] = malloc(strlen(word) + 1);
         if (words[cnt] == NULL) {
             fclose(file);
@@ -126,8 +132,10 @@ int load_array_of_words(const char* input_file_path, char*** array,
         strcpy(words[cnt], word);
         cnt++;
     }
+
     fclose(file);
     *array = words;
     *p_cnt = cnt;
+
     return OK;
 }
