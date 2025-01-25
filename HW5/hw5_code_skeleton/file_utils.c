@@ -87,7 +87,7 @@ int load_data_from_file(const char* input_file_path, unsigned char** buf,
 // Function to load blacklisted words from a file
 int load_array_of_words(const char* input_file_path, char*** array,
     unsigned int* p_cnt) {
-    // TODO
+   
     if (input_file_path == NULL || array == NULL || p_cnt == NULL) {
         return ERR_NULL_PTR;
     }
