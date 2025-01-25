@@ -9,7 +9,7 @@ int None(const unsigned char* data_in, unsigned int size_in, unsigned char* data
 	if (data_in == NULL || data_out == NULL) {
 		return ERR_NULL_PTR;
 	}
-	if (size_in > size_out) {
+	if (size_in != size_out) {
 		return ERR_BAD_FUNC_ARG;
 	}
 	for (unsigned int i = 0; i < size_in; i++) { //basicly doing nothing
@@ -23,7 +23,7 @@ int Flip_Even(const unsigned char* data_in, unsigned int size_in, unsigned char*
 	if (data_in == NULL || data_out == NULL) {
 		return ERR_NULL_PTR;
 	}
-	if (size_in > size_out) {
+	if (size_in != size_out) {
 		return ERR_BAD_FUNC_ARG;
 	}
 	for (unsigned int i = 0; i < size_in; i++) {
@@ -39,7 +39,7 @@ int Swap_3(const unsigned char* data_in, unsigned int size_in, unsigned char* da
 	if (data_in == NULL || data_out == NULL) {
 		return ERR_NULL_PTR;
 	}
-	if (size_in > size_out) {
+	if (size_in != size_out) {
 		return ERR_BAD_FUNC_ARG;
 	}
 	for (unsigned int i = 0; i < size_in; i += 2) {
@@ -61,7 +61,7 @@ int Rotate_and_center_5(const unsigned char* data_in, unsigned int size_in, unsi
 	if (data_in == NULL || data_out == NULL) {
 		return ERR_NULL_PTR;
 	}
-	if (size_in * 2 > size_out) {
+	if (size_in * 2 != size_out) {
 		return ERR_BAD_FUNC_ARG;
 	}
 	for (unsigned int i = 0; i < size_in; i++) {
@@ -78,7 +78,7 @@ int Inv_Rotate_and_center_5(const unsigned char* data_in, unsigned int size_in, 
 	if (data_in == NULL || data_out == NULL) {
 		return ERR_NULL_PTR;
 	}
-	if (size_in / 2 > size_out || size_in % 2 != 0) {
+	if (size_in / 2 != size_out || size_in % 2 != 0) {
 		return ERR_BAD_FUNC_ARG;
 	}
 	 for (unsigned int i = 0; i < size_in / 2; i++) {

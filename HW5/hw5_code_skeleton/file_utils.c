@@ -29,9 +29,9 @@ int write_data_to_file(const char* output_file_path, const unsigned char* buf,
         return ERR_NULL_PTR;
     }
     if (buf_size == 0) {
-        return ERR_BAD_ENC_TYPE;
+        return ERR_BAD_FUNC_ARG;
     }
-    FILE* file = fopen(output_file_path, "w"); // open file
+    FILE* file = fopen(output_file_path, "wb"); // open file
     if (file == NULL) {
         return ERR_FILE;
     }
@@ -49,7 +49,7 @@ int load_data_from_file(const char* input_file_path, unsigned char** buf,
     if (input_file_path == NULL || buf == NULL || buf_size == NULL) {
         return ERR_NULL_PTR;
     }
-    FILE* file = fopen(input_file_path, "r"); // open file
+    FILE* file = fopen(input_file_path, "rb"); // open file
     if (file == NULL) {
         return ERR_FILE;
     }
@@ -68,15 +68,11 @@ int load_data_from_file(const char* input_file_path, unsigned char** buf,
     if (res != OK) {
         return res;
     }
-    if (*buf == NULL) {
-        printf("*buf is null!\n");
-        return 1;
-    }
     
     size_t read = fread(*buf, 1, size, file); // reading
     fclose(file);
 
-    if (read > size) { // error in reading the file
+    if (read != size) { // error in reading the file
         free(*buf);
         return ERR_FILE;
     }
@@ -91,7 +87,7 @@ int load_array_of_words(const char* input_file_path, char*** array,
     if (input_file_path == NULL || array == NULL || p_cnt == NULL) {
         return ERR_NULL_PTR;
     }
-    FILE* file = fopen(input_file_path, "r");
+    FILE* file = fopen(input_file_path, "rb");
     if (file == NULL) {
         return ERR_FILE;
     }
@@ -102,8 +98,11 @@ int load_array_of_words(const char* input_file_path, char*** array,
     while (fgets(word, MAX_WORD_SIZE, file) != NULL) {
         // Remove newline character, if present
         size_t len = strlen(word);
-        if (len > 0 && word[len - 1] == '\n') {
-            word[len - 1] = '\0';
+        for (int i = 0; i < len; i++) {
+            if (word[i] == '\r' || word[i] == '\n') {
+                word[i] = '\0';
+                break;
+            }
         }
         char** temp = realloc(words, (cnt + 1) * sizeof(char*));
         if (temp == NULL) {

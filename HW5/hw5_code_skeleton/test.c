@@ -1,13 +1,35 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "algs.h"
 #include "censor.h"
+#include "parser.h"
+#include "error_types.h"
 #include <string.h>
 #include <stdlib.h>
 #ifndef MAIN_ON
 
+/* Parser Tests: */
+int test_parse_args(int argc, char** argv, command_t* p_cmd_expected, int exit_expected) {
+	command_t cmd;
+	command_t* p_cmd = &cmd;
+	int exit = parse_args(argc, argv, p_cmd);
+	if (exit != exit_expected) {
+		printf("test_parse_args: Error! in %s expected %d, got %d\n", argv[0], exit_expected, exit);
+		return 1;
+	}
+	int k = strcmp(p_cmd->input_path, p_cmd_expected->input_path) + strcmp(p_cmd->output_path, p_cmd_expected->output_path);
+	if (strcmp("ignore", p_cmd_expected->blacklist_path)) {
+		k += strcmp(p_cmd->blacklist_path, p_cmd_expected->blacklist_path);
+	}
+
+	if (p_cmd->op != p_cmd_expected->op || p_cmd->enc_type != p_cmd_expected->enc_type || k != 0) {
+		printf("test_parse_args: Error! in %s parser passed wrong arguments", argv[0]);
+		return 1;
+	}
+	return 0;
+}
 
 
-
+/* ENC/DEC/CESNOR Tests: */
 int test_None(char test_case, char expected) {
 	char buf[1] = { test_case };
 	char output[1];
@@ -74,6 +96,15 @@ int test_censor_string(char* str, char* cen_word, char* expected_str) {
 
 int test_main() {
 	int tests_failed = 0;
+	
+	
+	/* Parser Tests: */
+	command_t p_cmd_expected1 = { OP_ENC, ENC_TYPE_NONE, "in_txt", "out_txt", "ignore" };
+	char* argv1[] = { "test1", "-p", "enc", "-t", "0", "-i", "in_txt", "-o", "out_txt" };
+	test_parse_args(9, argv1, &p_cmd_expected1, OK);
+	
+	
+	/* ENC/DEC/CESNOR Tests: */
 	tests_failed += test_flip_even(0b11111111, 0b01010101);
 	tests_failed += test_flip_even(0xB3, 0x19);
 	tests_failed += test_flip_even(0b10110011, 0b00011001);
