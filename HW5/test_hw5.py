@@ -26,9 +26,9 @@ tests = [
     {'input_name': 'example1_in.txt', 'output_name': 'censor_example1_out.txt', 'operation': 'censor', 'enc_type': '0', 'blacklist_path': 'example1_blacklist'}
 
 ]
-def compare_files(output_file, expected_file):
+def compare_files(output_file, expected_file, is_readable: bool):
     try:
-        with open(output_file, 'rb') as of, open(expected_file, 'rb') as ef:
+        with open(output_file, 'r' if is_readable else 'rb') as of, open(expected_file, 'r' if is_readable else 'rb') as ef:
             output_data = list(of.read())
             expected_data = list(ef.read())
             if output_data != expected_data:
@@ -55,6 +55,7 @@ def run_test(test_params: dict):
     output_name: str = f"{outputs_path}\\{test_output_name}"
     expected_name: str = f"{expecteds_path}\\{test_output_name}"
     operation: str = test_params['operation']
+    is_readable = operation == 'censor'
     enc_type: str = test_params['enc_type']
     blacklist_path: str = test_params['blacklist_path']
     command = f"{executable_path} -p {operation} -t {enc_type} -i {input_name} -o {output_name}"
@@ -63,7 +64,7 @@ def run_test(test_params: dict):
     print(f"running {command}")
     res = subprocess.run(command, shell=True, capture_output=True, text=True)
     print(res.stdout)
-    if compare_files(output_name, expected_name):
+    if compare_files(output_name, expected_name, is_readable):
         print(f"test {test_name} passed")
     else:
         print(f"test {test_name} failed")
