@@ -66,7 +66,7 @@ void censor_string(char** p_str, const char* cen_word, const int str_len, const 
 
     for (int j = 0; j < str_len - cen_word_len; j++) {
 
-        if (j == 0 && is_special(*p_str, j + cen_word_len + 1)) {
+        if (j == 0 && is_special(*p_str, cen_word_len)) {
             if (is_eq(*p_str, cen_word, cen_word_len)) {
                 put_astrik(*p_str, 0, j + cen_word_len - 1);
                 j += cen_word_len - 1;
