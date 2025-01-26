@@ -44,14 +44,19 @@ int add_suffix(const char* output_censored_path, char** ptr_output_encrypted_pat
     char* new_suffix = "_enc.txt";
     int old_suffix_len = 4, new_suffix_len = 8;
     int old_len = strlen(output_censored_path), new_len = old_len + (new_suffix_len - old_suffix_len);
+    char* str;
 
-    exit = allocate_buffer(ptr_output_encrypted_path, new_len + 1); // + 1 for null terminator
+    exit = allocate_buffer(&str, new_len + 1); // + 1 for null terminator
     VALIDATE(exit);
 
-    strncpy(*ptr_output_encrypted_path, output_censored_path, old_len - old_suffix_len); // copy all char until .txt from censored
-    *ptr_output_encrypted_path[old_len - old_suffix_len] = '\0'; // strncpy doesn't null terminates for some reason
-    strcat(*ptr_output_encrypted_path, new_suffix);
+    //strncpy(*ptr_output_encrypted_path, output_censored_path, old_len - old_suffix_len); // copy all char until .txt from censored
+    //*ptr_output_encrypted_path[old_len - old_suffix_len] = '\0'; // strncpy doesn't null terminates for some reason
+    //strcat(*ptr_output_encrypted_path, new_suffix);
     
+    strncpy(str, output_censored_path, old_len - old_suffix_len); // copy all char until .txt from censored
+    str[old_len - old_suffix_len] = '\0'; // strncpy doesn't null terminates for some reason
+    strcat(str, new_suffix);
+    *ptr_output_encrypted_path = str;
     return OK;
 }
 
